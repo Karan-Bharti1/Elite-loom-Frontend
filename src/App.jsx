@@ -12,13 +12,13 @@ function App() {
   console.log(data)
 const displayData=data?.map(category=>(
   <>
-  <div className='col-md-2 my-2'>
+  <div className='col-md-2 my-2' key={category._id}>
     <div className='card'>
     <img src={category.categoryImageURL} className="card-img-top " id="category-card" alt="..."/> 
     <div className="card-img-overlay">
         
        
-        <Link className="btn bg-danger-subtle" to="/products">{category.categoryName}</Link>
+        <Link className="btn bg-danger-subtle"  to={`/products/${category._id}`}>{category.categoryName}</Link>
            </div>
          
     </div>

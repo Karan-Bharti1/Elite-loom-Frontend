@@ -9,3 +9,15 @@
 #home-load-placeholder{
     height:300px
 }
+#card-products-display{
+   height:350px;
+   width:100%;
+   object-fit:cover;
+  
+}
+#card-shimmer{
+    height:350px;
+    width:100%;
+    object-fit:cover;
+    
+}
