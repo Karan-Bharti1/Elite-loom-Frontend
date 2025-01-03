@@ -5,6 +5,7 @@ import './App.css'
 import useFetch from '../useFetch'
 import Header from '../components/Header'
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 function App() {
   const {data,loading,error}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
@@ -29,26 +30,74 @@ const displayData=data?.map(category=>(
   <Header/>
   <main>
     <div className='container '>
-<h1 className='display-3 py-4'>Explore wide Range of our collections</h1>
+
 </div>
 <section className='container'>
 <div className="card text-bg-dark" >
-<img className="img-fluid" id="introductoryImg" src="https://images.pexels.com/photos/5490979/pexels-photo-5490979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
+<img className="img-fluid" id="introductoryImg" src="https://images.pexels.com/photos/5706277/pexels-photo-5706277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
     
       <div className="card-img-overlay">
         
-   <h2>Elite Loom: Where Elegance Meets Everyday Comfort.</h2>
+   <h2 className='text-dark'>Elite Loom: Where Elegance Meets Everyday Comfort.</h2>
    <Link className="btn btn-danger" to="/products">Shop Now</Link>
       </div>
     </div>
 </section>
 <div className='container text-center py-4 display-5'> Top Categories to choose from...</div>
 <section className='container text-center'>
-  <div className='row'>
+  <div className='row container'>
 {displayData}
 </div>
 </section>
+
+  {loading && (<>
+  <div className='container'>
+  <div className='row '>
+<div className='col-md-2 '>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
+<p className='p-5'></p>
+</div>
+
+</div>
+<div className='col-md-2'>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
+<p className='p-5'></p>
+ 
+</div>
+
+</div>
+<div className='col-md-2'>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true"><p className='p-5'></p>
+</div>
+
+</div>
+<div className='col-md-2'>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
+<p className='p-5'></p>
+ 
+</div>
+
+</div>
+<div className='col-md-2'>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true"><p className='p-5'></p>
+</div>
+
+</div>
+<div className='col-md-2'>
+<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
+<p className='p-5'></p>
+ 
+</div>
+
+</div>
+
+    
+  </div></div>
+  
+  </>)}
+
   </main>
+  <Footer/>
     </>
   )
 }
