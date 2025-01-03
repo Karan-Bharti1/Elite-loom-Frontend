@@ -1,0 +1,8 @@
+#introductoryImg{
+    max-height:500px;
+}
+#category-card{
+    height:300px;
+   
+    object-fit: cover;
+}
