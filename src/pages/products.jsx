@@ -2,15 +2,46 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import useFetch from "../../useFetch";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import {  useState } from "react";
 const Products=()=>{
-    const [category,selectCategory]=useState('All')
+ const [sortData,setSortData]=useState("All")
+    const [genderFilter,setGenderFilter]=useState("All")
+    const [ratingRange,setRatingRange]=useState(2)
+    const [categoryCheckbox,setCategoryCheckbox]=useState([])
     const {categoryId}=useParams()
     const {data,loading,error}=useFetch(categoryId===undefined?"https://e-commerce-backend-ten-gamma.vercel.app/products":`https://e-commerce-backend-ten-gamma.vercel.app/products/category/${categoryId}`)
     console.log(data)
-    console.log(categoryId)
-    
-    const displayData=data?.map(product=>(
+    const {data:categoriesData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
+    console.log(categoriesData)
+const handleCheckBox=(event)=>{
+const {value,checked}=event.target
+if(checked){
+setCategoryCheckbox(prevData=>[...prevData,value])
+}else{
+setCategoryCheckbox(prev=>prev.filter(category=>category!=value))
+}
+}
+const handleSort=(event)=>{
+setSortData(event.target.value)
+}
+console.log(sortData)
+
+
+   const filteredData=data?.filter(product=>{
+  
+    const matchesGenderFilter = genderFilter ==="All" || product.gender===genderFilter
+    const matchesRatingRange=product.ratings>ratingRange
+    const matchesCategoryData =categoryCheckbox.length===0|| categoryCheckbox.includes(product.category.categoryName);
+    return  matchesGenderFilter && matchesRatingRange && matchesCategoryData
+   })   
+if(sortData==="lowToHigh"){
+    filteredData.sort((a,b)=>a.price-b.price)
+}else if(sortData==="highToLow"){
+    filteredData.sort((a,b)=>b.price-a.price)
+}
+
+    console.log(genderFilter)
+    const displayData=filteredData?.map(product=>(
         <div key={product._id} className="col-md-4 my-3">
 <div className="card border-0">
     <img src={product.imgURL} className="img-fluid" id="card-products-display" alt="Product Loading"/>
@@ -22,26 +53,12 @@ const Products=()=>{
     ))
 return (
     <><Header/>
-    <main>
+    <main className="container">
       <div className="container d-flex justify-content-between align-content-center">
          <p ><Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products </Link></p>
-      <div>{categoryId===undefined && (<select onChange={(event)=>selectCategory(event.target.value)}>
-        <option value="">---Select Category---</option>
-        <option value="Ethnic">Ethnic</option>
-        <option value="Bottomwear">Bottomwear</option>
-        <option value="Sportswear">Sportswear</option>
-        <option value="KidsWear">KidsWear</option>
-        <option value="Formal">Formal</option>
-        <option value="Topwear">Topwear</option>
-      </select>)}
-      </div></div> 
+      </div> 
 <div className="row">
-    <div className="col-md-2">
-        <div className="border-end">
-        <h2>Filters</h2>
-        </div>
-     
-    </div>
+{filteredData?.length===0 && <h2 className="text-center py-5">No Prouducts Found</h2>}
     <div className="col-md-9 ">
 <div className="row">
     {displayData}
@@ -106,16 +123,44 @@ return (
 <span className="placeholder w-75 my-2"></span>
 
     </div>
-    
+   
 </div>
 
 
         </div>
         
-        
+      
         </>)
     }
 </div>
+
+    </div>
+    <div className="col-md-2">
+        <div className="border-start px-4">
+      <h2 >Filters</h2>  
+     <label className="text-danger">Gender : </label><br/>
+    <label htmlFor="male"><input type="radio" value="male" name="gender" onChange={(event)=>setGenderFilter(event.target.value)} id="male"/> For Him</label> <br/>
+     <label htmlFor="female"><input type="radio" value="female" onChange={(event)=>setGenderFilter(event.target.value)} name="gender" id="female"/> For Her</label> <br/>
+     <label htmlFor="unisex"><input type="radio" value="unisex" onChange={(event)=>setGenderFilter(event.target.value)} name="gender" id="unisex"/> Unisex</label> 
+<br/>
+     <label htmlFor="customRange2" className="form-label text-danger">Rating ★ :</label>
+     <input type="range" value={ratingRange} onChange={event=>setRatingRange(event.target.value)} step="0.5" className="form-range" min="0" max="5" id="customRange2"/>
+<p> Greater Than: {ratingRange} ★</p>
+
+{categoryId===undefined &&(<>
+    <label className="text-danger">Categories : </label><br/>
+    {categoriesData?.map(category=>(<>
+    <label htmlFor={category.categoryName}><input type="checkbox" id={category.categoryName} name="Categories" value={category.categoryName} onChange={handleCheckBox}/> {category.categoryName}</label><br/>
+    </>))}
+</>)  
+}
+<label className="text-danger">Sort Data By Price :</label><br/>
+<label htmlFor="lowToHigh"><input type="radio" id="lowToHigh" name="price" onChange={handleSort} value="lowToHigh"/> Low To High</label><br/>
+<label htmlFor="highToLow"><input type="radio" id="highToLow" name="price" onChange={handleSort} value="highToLow"/> High To Low</label><br/>
+
+     <button className="btn btn-danger my-4" onClick={()=>window.location.reload()}>Clear Filters</button>
+        </div>
+     
     </div>
 </div>
     </main>
