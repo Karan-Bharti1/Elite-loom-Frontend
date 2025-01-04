@@ -24,12 +24,8 @@ setCategoryCheckbox(prev=>prev.filter(category=>category!=value))
 const handleSort=(event)=>{
 setSortData(event.target.value)
 }
-console.log(sortData)
 
-
-   const filteredData=data?.filter(product=>{
-  
-    const matchesGenderFilter = genderFilter ==="All" || product.gender===genderFilter
+   const filteredData=data?.filter(product=>{ const matchesGenderFilter = genderFilter ==="All" || product.gender===genderFilter
     const matchesRatingRange=product.ratings>ratingRange
     const matchesCategoryData =categoryCheckbox.length===0|| categoryCheckbox.includes(product.category.categoryName);
     return  matchesGenderFilter && matchesRatingRange && matchesCategoryData
@@ -39,8 +35,6 @@ if(sortData==="lowToHigh"){
 }else if(sortData==="highToLow"){
     filteredData.sort((a,b)=>b.price-a.price)
 }
-
-    console.log(genderFilter)
     const displayData=filteredData?.map(product=>(
         <div key={product._id} className="col-md-4 my-3">
 <div className="card border-0">
@@ -51,6 +45,16 @@ if(sortData==="lowToHigh"){
 <p><Link className="btn btn-danger">Add to Wishlist</Link><Link className="btn btn-danger mx-3">Add to Cart</Link></p>
         </div>
     ))
+    const ShimmerUICard=()=>(<div className="col-md-4 p-2">
+        <div className="card">
+            <div id="card-shimmer" className="bg-dark-subtle"></div>
+            <span className="placeholder my-2" ></span>
+            <span className="placeholder col-6 my-2"></span>
+    <span className="placeholder w-75 my-2"></span>
+    
+        </div>
+        
+    </div>)
 return (
     <><Header/>
     <main className="container">
@@ -65,67 +69,12 @@ return (
     {
         loading && (<>
         <div className="row">
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-    
-</div>
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-    
-</div>
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-    
-</div>
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-    
-</div>
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-    
-</div>
-<div className="col-md-4 p-2">
-    <div className="card">
-        <div id="card-shimmer" className="bg-dark-subtle"></div>
-        <span className="placeholder my-2" ></span>
-        <span className="placeholder col-6 my-2"></span>
-<span className="placeholder w-75 my-2"></span>
-
-    </div>
-   
-</div>
-
+<ShimmerUICard/>
+<ShimmerUICard/>
+<ShimmerUICard/>
+<ShimmerUICard/>
+<ShimmerUICard/>
+<ShimmerUICard/>
 
         </div>
         
