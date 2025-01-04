@@ -21,3 +21,8 @@
     object-fit:cover;
     
 }
+#productDescImg{
+    height:550px;
+    width:80%;
+    object-fit:cover;
+}
