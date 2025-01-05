@@ -19,7 +19,7 @@ return(
           
         <NavLink className="nav-link display-2 px-4">Login</NavLink>
         <NavLink className="nav-link display-2 px-4">♡ Wishlist</NavLink>
-        <NavLink className="nav-link display-2 px-4">🛒Cart</NavLink>
+        <NavLink to="/cart" className="nav-link display-2 px-4">🛒Cart</NavLink>
           </div>
         </div>
       </div>
