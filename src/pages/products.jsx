@@ -13,6 +13,8 @@ const Products=()=>{
     console.log(data)
     const {data:categoriesData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
     console.log(categoriesData)
+    const currentCategoryData=categoriesData?.find(category=>category._id===categoryId)
+    console.log(currentCategoryData)
 const handleCheckBox=(event)=>{
 const {value,checked}=event.target
 if(checked){
@@ -37,14 +39,16 @@ if(sortData==="lowToHigh"){
 }
     const displayData=filteredData?.map(product=>(
         <div key={product._id} className="col-md-4 my-3">
-            <Link to={`/products/product/${product._id}` } className="text-decoration-none">
+           
 <div className="card border-0">
+<Link to={`/products/product/${product._id}` } className="text-decoration-none">
     <img src={product.imgURL} className="img-fluid" id="card-products-display" alt="Product Loading"/>
+    </Link>
     <p className="d-flex justify-content-between align-content-center pt-2"><span>{product.productName}</span><span>{product.ratings}★</span></p>
 
 <p><s>₹ {product.price}</s> <span>₹ {product.price-(product.discountPercentage*product.price)/100}/-</span> <span className="text-danger fw-bold">{product.discountPercentage}% off</span></p></div>
 <p><Link className="btn btn-danger">Add to Wishlist</Link><Link className="btn btn-danger mx-3">Add to Cart</Link></p>
-</Link>
+
         </div>
     ))
     const ShimmerUICard=()=>(<div className="col-md-4 p-2">
@@ -52,17 +56,15 @@ if(sortData==="lowToHigh"){
             <div id="card-shimmer" className="bg-dark-subtle"></div>
             <span className="placeholder my-2" ></span>
             <span className="placeholder col-6 my-2"></span>
-    <span className="placeholder w-75 my-2"></span>
-    
+    <span className="placeholder w-75 my-2"></span>  
         </div>
-        
     </div>)
 return (
     <><Header/>
     <main className="container">
- 
-         <p ><Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products </Link></p>
-    
+      
+         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products </Link> {categoryId!=undefined &&<span>&gt; {currentCategoryData?.categoryName}</span>}
+         <br/>
 <div className="row">
 {filteredData?.length===0 && <h2 className="text-center py-5">No Prouducts Found</h2>}
     <div className="col-md-9 ">
