@@ -37,7 +37,7 @@ const Cart = () => {
             </div>
         ))
         const subtotal=data?.reduce((acc,curr)=>acc+(curr.productDetails.price-(curr.productDetails.price*curr.productDetails.discountPercentage)/100)*curr.quantity,0)
-    return ( <> <Header/> <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products " className=" btn ">Products
+    return ( <> <Header/> <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products" className=" btn ">Products
  </Link>/ <Link className = "btn" to = "/cart" > Cart </Link>
 <div className="row">
 <div className="col-md-6">

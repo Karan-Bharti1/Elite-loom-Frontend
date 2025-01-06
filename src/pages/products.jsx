@@ -12,7 +12,7 @@ const Products = () => {
         setRatingRange] = useState(2)
     const [categoryCheckbox,
         setCategoryCheckbox] = useState([])
-    
+    const [size,setSize]=useState({})
     const {categoryId} = useParams()
     const {data, loading, error} = useFetch(categoryId === undefined
         ? "https://e-commerce-backend-ten-gamma.vercel.app/products"
@@ -50,6 +50,35 @@ const Products = () => {
     } else if (sortData === "highToLow") {
         filteredData.sort((a, b) => b.price - a.price)
     }
+  const handleSizeUpdate=async(productId,size)=>{
+setSize((prev)=>({...prev,[productId]:size}))
+    }
+    console.log(size)
+    const handleSubmit=async(event,productId)=>{
+        event.preventDefault()
+        const requestData={
+            selectedSize:size[productId],
+            productDetails:productId
+        }
+      console.log(requestData)
+      try {
+       const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",{
+        method:'POST',
+        headers:{
+            'content-type':'application/json '
+        },
+        body:JSON.stringify(requestData)
+       })
+  if(!response.ok){
+    throw 'Failed to add item into the cart'
+  }
+  const data=await response.json()
+  if(data)
+alert("Item Added to the cart successfully")
+      } catch (error) {
+       console.log(error)
+      }
+    }
     const displayData = filteredData
         ?.map(product => (
             <div key={product._id} className="col-md-4 my-3">
@@ -77,9 +106,9 @@ const Products = () => {
                     </p>
                 </div>
 
-                <form >
+                <form onSubmit={(event)=>handleSubmit(event,product._id)}>
                     <div className="d-flex justify-content-between align-content-center">
-                        <select >
+                        <select required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
                             <option value="">Your Size</option>
                             {product
                                 .sizes

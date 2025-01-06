@@ -70,7 +70,9 @@ try {
                 {size}</label>
                        ))
 } <br/> <button className = "btn btn-danger m-2" type="submit" > Add to Cart </button>
-</form><hr/> <p className = "fs-5" > Product Details </p>
+</form>
+{message && <p className="text-danger">{message}</p>}
+<hr/> <p className = "fs-5" > Product Details </p>
 {data?.details.map((detail,index)=>(<li key={index}>{detail}</li >))
 } < hr /> <p className="fs-5">Product Description</p>
 {
