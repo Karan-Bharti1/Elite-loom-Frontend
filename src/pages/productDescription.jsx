@@ -8,12 +8,14 @@ const ProductDescription = () => {
     const [message,setMessage]=useState()
     const {productId} = useParams()
     console.log(size)
-    const {data, loading, error} = useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/products/${productId}`)
+    const [alert,setAlert]=useState({visible:false,message:''})
+    const {data, error} = useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/products/${productId}`)
    const handleSubmit=async(event)=>{
 event.preventDefault()
 const requestData={
     selectedSize:size,
-    productDetails:productId
+    productDetails:productId,
+    quantity:1
 }
 try {
   const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",{
@@ -28,14 +30,19 @@ try {
   }
   const data=await response.json() 
   if(data){
-    setMessage("Item Added to Cart Successfully")
+   setAlert({visible:true,message:"Items added to cart successfully"})
   }
-  setTimeout(()=>setMessage(),1000)
+  setTimeout(()=>setAlert({visible:false,message:''}),2000)
 } catch (error) {
     console.log(error)
 }
    }
-    return ( <> <Header/> <main className = "container" > <p >
+    return ( <>
+    
+     <Header/> <main className = "container" > <p >
+     {
+        alert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alert.message}</span>
+    }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products
         </Link>
         &gt; {data
@@ -67,7 +74,7 @@ try {
     data?.sizes
             .map((size, index) => (<label className="mx-2" key={index} htmlFor={size}>
                 <input type="radio" required  name="sizes" value={size} id={size} onChange={event=>setSelectedSize(event.target.value)}  />
-                {size}</label>
+                {" "} {size}</label>
                        ))
 } <br/> <button className = "btn btn-danger m-2" type="submit" > Add to Cart </button>
 </form>

@@ -90,7 +90,9 @@ console.log(error)
                             % off
                         </span>
                     </p>
-                   <button onClick={()=>handleClickIncrease(item._id)}>+</button ><span className="px-2">{item.quantity}</span><button onClick={()=>handleClickDecrease(item._id)}>-</button><br/><br/>
+                   <button onClick={()=>handleClickIncrease(item._id)}>+</button ><span className="px-2">{item.quantity}</span><button onClick={()=>handleClickDecrease(item._id)}>-</button>
+                   <span className="mx-3">Selected Size : <span className="text-danger">{item.selectedSize}</span></span>
+                   <br/><br/>
                     <button className=" btn btn-danger p-1 m-1" onClick={()=>handleDelete(item._id)}>Delete Item</button>
                     <button className=" btn btn-danger p-1 m-1">Add to Wishlist</button>
                 </div>
@@ -106,7 +108,24 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     return ( <> <Header/> <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products" className=" btn ">Products
  </Link>/ <Link className = "btn" to = "/cart" > Cart </Link>
  {error && <h2>No Items in Cart</h2>}
-<div className="row">
+ {loading && (
+    <div className="text-center py-5">
+           <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+    </div>
+ 
+ )}
+{!loading &&<div className="row">
 <div className="col-md-6">
     <div className="fs-2 py-3 text-center">Cart Items</div >
     {cartItems.length===0 && !loading  && <h2 className="text-center">No items in the cart!</h2>}
@@ -126,7 +145,7 @@ Price Details
             <h4 className="text-center">Sub-Total: ₹ {subtotal}</h4>
     </div> </div>
 
-</div > </div> </main>
+</div > </div> }</main>
 </>)
 }
 export default Cart;

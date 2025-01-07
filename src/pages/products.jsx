@@ -13,6 +13,7 @@ const Products = () => {
     const [categoryCheckbox,
         setCategoryCheckbox] = useState([])
     const [size,setSize]=useState({})
+    const [alert,setAlert]=useState({visible:false,message:''})
     const {categoryId} = useParams()
     const {data, loading, error} = useFetch(categoryId === undefined
         ? "https://e-commerce-backend-ten-gamma.vercel.app/products"
@@ -58,7 +59,8 @@ setSize((prev)=>({...prev,[productId]:size}))
         event.preventDefault()
         const requestData={
             selectedSize:size[productId],
-            productDetails:productId
+            productDetails:productId,
+            quantity:1
         }
       console.log(requestData)
       try {
@@ -73,8 +75,12 @@ setSize((prev)=>({...prev,[productId]:size}))
     throw 'Failed to add item into the cart'
   }
   const data=await response.json()
-  if(data)
-alert("Item Added to the cart successfully")
+  if(data){
+   setAlert({visible:true,messsage:"Item Added to Cart Successfuly"})
+  }
+  setTimeout(()=>{
+    setAlert({visible:false,message:''})
+},3000)
       } catch (error) {
        console.log(error)
       }
@@ -130,20 +136,28 @@ alert("Item Added to the cart successfully")
             </div>
         </div>
     )
-    return ( <>< Header /> <main className="container">
+    return ( <>
 
+                    < Header /> <main className="container">
+                    {alert.visible && (
+                        <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3" id="cart-alert" role="alert">
+                        Item added to cart successfully
+                      </span>
+                    )}
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>
         {categoryId != undefined &&<span>&gt; {" "}
         { currentCategoryData
                 ?.categoryName
         } </span>}
         <br/>
+        
         <div className="row">
             {filteredData
                 ?.length === 0 && <h2 className="text-center py-5">No Prouducts Found</h2>}
             <div className="col-md-9 ">
                 <div className="row">
                     {displayData}
+                    
                     {loading && ( <> <div className="row">
                         <ShimmerUICard/>
                         <ShimmerUICard/>
