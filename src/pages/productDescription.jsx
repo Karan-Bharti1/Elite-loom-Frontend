@@ -5,11 +5,10 @@ import {Link} from "react-router-dom"
 import { useState } from "react"
 const ProductDescription = () => {
     const [size,setSelectedSize]=useState()
-    const [message,setMessage]=useState()
     const {productId} = useParams()
     console.log(size)
     const [alert,setAlert]=useState({visible:false,message:''})
-    const {data, error} = useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/products/${productId}`)
+    const {data,loading, error} = useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/products/${productId}`)
    const handleSubmit=async(event)=>{
 event.preventDefault()
 const requestData={
@@ -47,7 +46,24 @@ try {
         </Link>
         &gt; {data
             ?.productName}
-    </p> <div className = "row" > <div className="col-md-7">
+    </p>
+    {loading && (
+    <div className="text-center py-5">
+           <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+    </div>
+ 
+ )} {!loading &&<div className = "row" > <div className="col-md-7">
         <img
             src={data
             ?.imgURL}
@@ -78,7 +94,7 @@ try {
                        ))
 } <br/> <button className = "btn btn-danger m-2" type="submit" > Add to Cart </button>
 </form>
-{message && <p className="text-danger">{message}</p>}
+
 <hr/> <p className = "fs-5" > Product Details </p>
 {data?.details.map((detail,index)=>(<li key={index}>{detail}</li >))
 } < hr /> <p className="fs-5">Product Description</p>
@@ -94,7 +110,7 @@ data?.features
 } < hr /> <p className="fs-5">Additional Details</p> < p > Gender Preference : {
 data?.gender
 } </p>
-<p>Exhange Policy: {data?.exchangePolicy}</p > </div> </div>
+<p>Exhange Policy: {data?.exchangePolicy}</p > </div> </div>}
 </main > </>)
 }
 export default ProductDescription

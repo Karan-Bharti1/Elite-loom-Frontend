@@ -6,6 +6,7 @@ import App from './App.jsx'
 import Products from './pages/products.jsx'
 import ProductDescription from './pages/productDescription.jsx'
 import Cart from './pages/cart.jsx'
+import Wishlist from './pages/wishlist.jsx'
 
 const router=createBrowserRouter([
   {
@@ -24,6 +25,9 @@ const router=createBrowserRouter([
   },{
     path:"/cart",
     element:<Cart/>
+  },{
+    path:"/wishlist",
+    element:<Wishlist/>
   }
 ])
 createRoot(document.getElementById('root')).render(

@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import Header from "../../components/Header";
 import useFetch from "../../useFetch";
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 const Products = () => {
     const [sortData,
         setSortData] = useState("All")
@@ -14,12 +14,18 @@ const Products = () => {
         setCategoryCheckbox] = useState([])
     const [size,setSize]=useState({})
     const [alert,setAlert]=useState({visible:false,message:''})
+    const[wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
+    const[wishlistItemAlreadyExistingAlert,setWishlistItemAlreadyExistingAlert]=useState({visible:false,message:''})
     const {categoryId} = useParams()
+ 
     const {data, loading, error} = useFetch(categoryId === undefined
         ? "https://e-commerce-backend-ten-gamma.vercel.app/products"
         : `https://e-commerce-backend-ten-gamma.vercel.app/products/category/${categoryId}`)
 
     const {data: categoriesData} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
+   const {data:wishListItemsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist")
+   console.log(wishListItemsData)
+   
     console.log(categoriesData)
     const currentCategoryData = categoriesData
         ?.find(category => category._id === categoryId)
@@ -76,6 +82,7 @@ setSize((prev)=>({...prev,[productId]:size}))
   }
   const data=await response.json()
   if(data){
+    
    setAlert({visible:true,messsage:"Item Added to Cart Successfuly"})
   }
   setTimeout(()=>{
@@ -85,8 +92,45 @@ setSize((prev)=>({...prev,[productId]:size}))
        console.log(error)
       }
     }
+    const handlewishlistClick=async(productId)=>{
+        const requestData={
+            productDetails:productId
+        }
+        const isInWishList=wishListItemsData?.some(item=>item.productDetails._id===productId)
+        console.log(isInWishList)
+try {
+    const wishlistResponse=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/wishlist/${productId}`)
+    const wishListData=await wishlistResponse.json()
+    if(wishListData && isInWishList){
+   setWishlistItemAlreadyExistingAlert({visible:true,message:"Already Wishlisted"})
+    }
+    setTimeout(()=>setWishlistItemAlreadyExistingAlert({visible:false,message:''}),2000)
+ const response   =await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist",{
+method:'POST',
+headers:{
+    'Content-Type':'application/json'
+},
+body:JSON.stringify(requestData)
+ })
+ if(!response.ok){
+    throw "Failed to add item to the wishlist"
+ }
+ const wishlistItemData=response.json()
+ if(wishlistItemData){
+    
+    setWishlistAlert({visible:true,message:'Wishlisted'})
+ }
+ setTimeout(()=>setWishlistAlert({visible:false,message:''}),2000)
+
+} catch (error) {
+    console.log(error)
+}
+    }
     const displayData = filteredData
-        ?.map(product => (
+        ?.map(product => {
+           
+  
+            return (
             <div key={product._id} className="col-md-4 my-3">
 
                 <div className="card border-0">
@@ -100,8 +144,8 @@ setSize((prev)=>({...prev,[productId]:size}))
                     </Link>
                     <p className="d-flex justify-content-between align-content-center pt-2">
                         <span>{product.productName}</span>
-                        <span>{product.ratings}★</span>
-                        <button className="btn p-0 ">❤️</button>
+                      
+                        <button className="btn btn-danger p-1" onClick={()=>handlewishlistClick(product._id)}>🤍</button>
                     </p>
 
                     <p>
@@ -114,18 +158,18 @@ setSize((prev)=>({...prev,[productId]:size}))
 
                 <form onSubmit={(event)=>handleSubmit(event,product._id)}>
                     <div className="d-flex justify-content-between align-content-center">
-                        <select required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
+                        <select  required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
                             <option value="">Your Size</option>
                             {product
                                 .sizes
                                 .map(size => ( <> <option>{size}</option> </>))}
-                        </select>
+                        </select><br/>
                         <button type="submit" className="btn btn-danger">Add to Cart</button>
                     </div>
                 </form>
 
             </div>
-        ))
+        )})
     const ShimmerUICard = () => (
         <div className="col-md-4 p-2">
             <div className="card">
@@ -140,10 +184,20 @@ setSize((prev)=>({...prev,[productId]:size}))
 
                     < Header /> <main className="container">
                     {alert.visible && (
-                        <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3" id="cart-alert" role="alert">
+                        <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3"  role="alert">
                         Item added to cart successfully
                       </span>
                     )}
+                    {
+                        wishlistAlert.visible && (
+                            <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistAlert.message}</span>
+                        )
+                    }
+                    {
+                        wishlistItemAlreadyExistingAlert.visible && (
+                            <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistItemAlreadyExistingAlert.message}</span>
+                        )
+                    }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>
         {categoryId != undefined &&<span>&gt; {" "}
         { currentCategoryData
@@ -153,7 +207,7 @@ setSize((prev)=>({...prev,[productId]:size}))
         
         <div className="row">
             {filteredData
-                ?.length === 0 && <h2 className="text-center py-5">No Prouducts Found</h2>}
+                ?.length === 0 && <h2 className="text-center py-5">No Products Found</h2>}
             <div className="col-md-9 ">
                 <div className="row">
                     {displayData}

@@ -18,7 +18,7 @@ return(
           <div className="navbar-nav ms-auto mb-2 mb-lg-0 " >
           
         <NavLink className="nav-link display-2 px-4">Login</NavLink>
-        <NavLink className="nav-link display-2 px-4">♡ Wishlist</NavLink>
+        <NavLink className="nav-link display-2 px-4" to="/wishlist">♡ Wishlist</NavLink>
         <NavLink to="/cart" className="nav-link display-2 px-4">🛒Cart</NavLink>
           </div>
         </div>

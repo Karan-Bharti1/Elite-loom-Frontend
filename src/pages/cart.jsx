@@ -6,7 +6,6 @@ const Cart = () => {
     const {data, loading, error} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",[])
     const [quantity,setQuantity]=useState({})
     const cartItems = Array.isArray(data) ? data : [];
-console.log(cartItems)
 
 useEffect(()=>{
     if(cartItems.length>0){
@@ -68,7 +67,9 @@ console.log(error)
     const displayCartItems =  cartItems?.map(item => (
             <div key={item._id} className="row mb-3 border">
                 <div className="col-md-5">
-                    <img src={item.productDetails.imgURL} className="img-fluid" id="cart-image"/>
+                    <Link to={`/products/product/${item.productDetails._id}`}>
+                    <img src={item.productDetails.imgURL} className="img-fluid" id="cart-image"/></Link>
+                   
                 </div>
                 <div className="col-md-7">
                     <div className="fs-4">{item.productDetails.productName}</div>
@@ -128,7 +129,7 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
 {!loading &&<div className="row">
 <div className="col-md-6">
     <div className="fs-2 py-3 text-center">Cart Items</div >
-    {cartItems.length===0 && !loading  && <h2 className="text-center">No items in the cart!</h2>}
+    {cartItems.length===0 && loading  && <h2 className="text-center">No items in the cart!</h2>}
      {displayCartItems} </div>
 <div className="col-md-6 px-5">
     <div className="border border-2 mt-5">
