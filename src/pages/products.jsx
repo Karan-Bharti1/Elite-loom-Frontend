@@ -17,14 +17,28 @@ const Products = () => {
     const[wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
     const[wishlistItemAlreadyExistingAlert,setWishlistItemAlreadyExistingAlert]=useState({visible:false,message:''})
     const {categoryId} = useParams()
- 
+    const [wishlistItems, setWishlistItems] = useState([]);
+    const [wishlistUpdateTrigger, setWishlistUpdateTrigger] = useState(false);
     const {data, loading, error} = useFetch(categoryId === undefined
         ? "https://e-commerce-backend-ten-gamma.vercel.app/products"
         : `https://e-commerce-backend-ten-gamma.vercel.app/products/category/${categoryId}`)
 
     const {data: categoriesData} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
-   const {data:wishListItemsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist")
-   console.log(wishListItemsData)
+   
+   useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist");
+        const wishListItemsData = await response.json();
+ setWishlistItems(wishListItemsData)
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
+    };
+  
+    fetchWishlist();
+  }, [wishlistUpdateTrigger]);
+  
    
     console.log(categoriesData)
     const currentCategoryData = categoriesData
@@ -96,7 +110,7 @@ setSize((prev)=>({...prev,[productId]:size}))
         const requestData={
             productDetails:productId
         }
-        const isInWishList=wishListItemsData?.some(item=>item.productDetails._id===productId)
+        const isInWishList= wishlistItems?.some(item=>item.productDetails._id===productId)
         console.log(isInWishList)
 try {
     const wishlistResponse=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/wishlist/${productId}`)
@@ -121,7 +135,7 @@ body:JSON.stringify(requestData)
     setWishlistAlert({visible:true,message:'Wishlisted'})
  }
  setTimeout(()=>setWishlistAlert({visible:false,message:''}),2000)
-
+setWishlistUpdateTrigger(!wishlistUpdateTrigger)
 } catch (error) {
     console.log(error)
 }
