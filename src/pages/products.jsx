@@ -30,7 +30,8 @@ const Products = () => {
       try {
         const response = await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist");
         const wishListItemsData = await response.json();
- setWishlistItems(wishListItemsData)
+        if(Array.isArray(wishListItemsData))
+{ setWishlistItems(wishListItemsData)}
       } catch (error) {
         console.error("Error fetching wishlist:", error);
       }
@@ -147,7 +148,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
             return (
             <div key={product._id} className="col-md-4 my-3">
 
-                <div className="card border-0">
+                <div className="card border-0 shadow-sm p-3">
                     <Link to={`/products/product/${product._id}`} className="text-decoration-none">
                         <img
                             src={product.imgURL}
@@ -161,16 +162,15 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                       
                         <button className="btn btn-danger p-1" onClick={()=>handlewishlistClick(product._id)}>🤍</button>
                     </p>
-
-                    <p>
+<div className="d-flex justify-content-between align-content-center">
+<p>
                         <s>₹ {product.price}</s>
                         <span>₹ {product.price - (product.discountPercentage * product.price) / 100}/-</span>
                         <span className="text-danger fw-bold">{product.discountPercentage}% off</span>
 
-                    </p>
-                </div>
-
-                <form onSubmit={(event)=>handleSubmit(event,product._id)}>
+                    </p><p>{product.ratings} ★</p>
+</div>
+<form onSubmit={(event)=>handleSubmit(event,product._id)}>
                     <div className="d-flex justify-content-between align-content-center">
                         <select  required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
                             <option value="">Your Size</option>
@@ -180,7 +180,10 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         </select><br/>
                         <button type="submit" className="btn btn-danger">Add to Cart</button>
                     </div>
-                </form>
+                </form>      
+                </div>
+
+          
 
             </div>
         )})
