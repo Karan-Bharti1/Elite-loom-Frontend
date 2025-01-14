@@ -114,9 +114,8 @@ setSize((prev)=>({...prev,[productId]:size}))
         const isInWishList= wishlistItems?.some(item=>item.productDetails._id===productId)
         console.log(isInWishList)
 try {
-    const wishlistResponse=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/wishlist/${productId}`)
-    const wishListData=await wishlistResponse.json()
-    if(wishListData && isInWishList){
+    
+    if( isInWishList){
    setWishlistItemAlreadyExistingAlert({visible:true,message:"Already Wishlisted"})
     }
     setTimeout(()=>setWishlistItemAlreadyExistingAlert({visible:false,message:''}),2000)

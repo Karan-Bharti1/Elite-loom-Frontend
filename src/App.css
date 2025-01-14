@@ -22,9 +22,9 @@
     
 }
 #productDescImg{
-    height:550px;
-    width:80%;
-    object-fit:cover;
+    height:500px;
+    width:90%;
+    object-fit:scale-down;
 }
 #cart-image{
     height:250px;
@@ -35,4 +35,9 @@
     height:300px;
     width:100%;
     object-fit:cover;    
+}
+#image-noWishlist{
+    height:300px;
+    width:100%;
+    object-fit:cover; 
 }

@@ -10,6 +10,19 @@ const Cart = () => {
 const {data, loading, error} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/cart")
 const[deleteItemAlert,setDeleteItemAlert]=useState({visible:false,message:''})
 const [quantityAlert,setQuantityAlert]=useState({visible:false,message:''})
+const [moveToWishlistAlert,setMoveToWishlistAlert]=useState({visible:false,message:''})
+const {data:productsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/products")
+console.log(productsData)
+const [addressesData,setAddressesData]=useState([])
+const {data:addressData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/address")
+console.log(addressData)
+useEffect(()=>{
+    if(Array.isArray(addressData)){
+        setAddressesData(addressData)
+    }else{
+        setAddressesData([])
+    }
+})
 const cartItems = Array.isArray(data) ? data : [];
     const [cartData,setCartData]=useState([])
     
@@ -94,7 +107,59 @@ setTimeout(()=>{
 console.log(error)
 }
     }
-   
+    function getRandomProducts(products, num) {
+        if (!Array.isArray(products)) {
+            return [];
+        }
+        const shuffled = products?.sort(() => 0.5 - Math.random());
+        console.log(shuffled)
+
+        return shuffled.slice(0, num);
+    }
+    const randomProducts = getRandomProducts(productsData, 4);
+    const displayProducts=randomProducts?.map(item=>(
+        <div key={item._id} className="col-md-3 mb-5">
+        <div className="card">
+            <Link to={`/products/product/${item._id}`}>
+            <img src={item.imgURL} className="card-img-top" alt={item.name} id="image-noWishlist" /></Link>
+           
+            <div className="card-body">
+                <h5 className="card-title">{item.name}</h5>
+                <p className="card-text"><s>Price: ₹{item.price}</s><span> ₹ {item.price-(item.price*(item.discountPercentage/100))}/- <span className="text-danger fw-bold">{item.discountPercentage}% off</span></span></p>
+            </div>
+        </div>
+    </div>
+    ))
+    const handleWishlist=async(cartId,productId)=>{
+        const requestData={
+         productDetails:productId
+        }
+try {
+    const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist",{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(requestData)
+    })
+    const deleteResponse=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/cart/${cartId}`,{
+        method:"DELETE"
+    })
+    const data=await deleteResponse.json()
+    if(data){
+        setCartData(prev => prev.filter(item => item._id !== cartId));
+        setQuantity(prev=>{
+const newQuanities={...prev}
+delete newQuanities[cartId]
+return newQuanities
+        })
+        setMoveToWishlistAlert({visible:true,message:'Item moved to wishlist'})
+    }
+    setTimeout(()=>setMoveToWishlistAlert({visible:false,message:''}),1500)
+} catch (error) {
+    console.log(error)
+}
+    }
     const displayCartItems =  cartData?.map((item) => (
             <div key={item._id} className="row mb-3 border">
                 <div className="col-md-5">
@@ -126,7 +191,7 @@ console.log(error)
                    <span className="mx-3">Selected Size : <span className="text-danger">{item.selectedSize}</span></span>
                    <br/><br/>
                     <button className=" btn btn-danger p-1 m-1" onClick={()=>handleDelete(item._id)}>Delete Item</button>
-                    <button className=" btn btn-danger p-1 m-1">Add to Wishlist</button>
+                    <button className=" btn btn-danger p-1 m-1" onClick={()=>handleWishlist(item._id,item.productDetails._id)}>Move to wishlist</button>
                 </div>
             </div>
         ))
@@ -144,6 +209,7 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     {
         quantityAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{quantityAlert.message}</span>
     }
+    {moveToWishlistAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToWishlistAlert.message}</span>}
     <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products" className=" btn ">Products
  </Link>/ <Link className = "btn" to = "/cart" > Cart </Link>
  {error && <h2>No Items in Cart</h2>}
@@ -164,7 +230,7 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     </div>
  
  )}
-{!loading &&<div className="row">
+{!loading && cartData.length>0 &&<div className="row">
 <div className="col-md-6">
     <div className="fs-2 py-3 text-center">Cart Items</div >
     {cartItems.length===0 && loading  && <h2 className="text-center">No items in the cart!</h2>}
@@ -183,8 +249,23 @@ Price Details
             <hr/>
             <h4 className="text-center">Sub-Total: ₹ {subtotal}</h4>
     </div> </div>
+    <div className="text-center py-4">
+  <Link className="btn btn-danger" to="/chooseaddress">Select Address</Link>
+    </div>
 
-</div > </div> }</main>
+</div > </div> }
+{!loading && cartData.length===0 && (<>
+    <div>
+    <h1 className="text-center"> No Items present in your Cart .</h1>
+    <div className="text-center"><Link className="btn btn-danger fw-bold my-3" to="/products">Explore us</Link></div>
+    <div className="row">
+    {displayProducts}
+    </div>
+   
+    </div>
+
+</>)}
+</main>
 </>)
 }
 export default Cart;

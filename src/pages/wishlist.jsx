@@ -4,6 +4,8 @@ import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
 const Wishlist=()=>{
     const {data,loading,error}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist")
+    const {data:productsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/products")
+console.log(productsData)
    const [sizeData,setSizeData]=useState({})
    console.log(sizeData)
     const [wishlistData,setWishlistData]=useState([])
@@ -78,6 +80,30 @@ try {
     console.log(error)
 }
     }
+    function getRandomProducts(products, num) {
+        if (!Array.isArray(products)) {
+            return [];
+        }
+        const shuffled = products?.sort(() => 0.5 - Math.random());
+        console.log(shuffled)
+
+        return shuffled.slice(0, num);
+    }
+    
+    const randomProducts = getRandomProducts(productsData, 4);
+    const displayProducts=randomProducts?.map(item=>(
+        <div key={item._id} className="col-md-3 mb-5">
+        <div className="card">
+            <Link to={`/products/product/${item._id}`}>
+            <img src={item.imgURL} className="card-img-top" alt={item.name} id="image-noWishlist" /></Link>
+           
+            <div className="card-body">
+                <h5 className="card-title">{item.name}</h5>
+                <p className="card-text"><s>Price: ₹{item.price}</s><span> ₹ {item.price-(item.price*(item.discountPercentage/100))}/- <span className="text-danger fw-bold">{item.discountPercentage}% off</span></span></p>
+            </div>
+        </div>
+    </div>
+    ))
     const displayData=wishlistData?.map(item=>(
         <div key={item._id} className="col-md-3 my-3 ">
 <div className="card  shadow-sm">
@@ -103,13 +129,11 @@ try {
                             <option value="">Your Size</option>
                             {item.productDetails
                                 .sizes
-                                .map(size => ( <> <option>{size}</option> </>))}
+                                .map((size,index) => ( <> <option key={index} >{size}</option> </>))}
                         </select><br/>
-                        <button type="submit" className="btn btn-danger">Add to Cart</button>
+                        <button type="submit" className="btn btn-danger">Move to Cart</button>
                    
-                            </form>
-                        
-                  
+                            </form>      
 </div>
 </div>
         </div>
@@ -140,6 +164,15 @@ return(
     </div>
  
  )}
+ {!loading &&wishlistData.length===0 &&<div>
+    <h1 className="text-center"> No Items present in wishlist .</h1>
+    <div className="text-center"><Link className="btn btn-danger fw-bold my-3" to="/products">Explore us</Link></div>
+    <div className="row">
+    {displayProducts}
+
+    </div>
+   
+    </div>}
  <div className="row">
  {displayData}
  </div>

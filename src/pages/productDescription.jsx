@@ -2,13 +2,33 @@ import {useParams} from "react-router-dom"
 import Header from "../../components/Header"
 import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 const ProductDescription = () => {
     const [size,setSelectedSize]=useState()
     const {productId} = useParams()
     console.log(size)
     const [alert,setAlert]=useState({visible:false,message:''})
+    const [wishlistTrigger,setWishlistTrigger]=useState(false)
+    const [wishlistItems,setWishlistItems]=useState([])
+    const [wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
+    const [alreadyWishlistedAlert,setAlreadyWishlistedAlert]=useState({visible:false,message:''})
     const {data,loading, error} = useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/products/${productId}`)
+    const {data:wishlistData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist")
+    console.log(wishlistData)
+    useEffect(() => {
+      const fetchWishlist = async () => {
+        try {
+          const response = await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist");
+          const wishListItemsData = await response.json();
+          if(Array.isArray(wishListItemsData))
+  { setWishlistItems(wishListItemsData)}
+        } catch (error) {
+          console.error("Error fetching wishlist:", error);
+        }
+      };
+    
+      fetchWishlist();
+    }, [wishlistTrigger]);
    const handleSubmit=async(event)=>{
 event.preventDefault()
 const requestData={
@@ -36,17 +56,65 @@ try {
     console.log(error)
 }
    }
+   const handleWishlistClick=async(productId)=>{
+const requestData={
+  productDetails:productId
+}
+try {
+  const isInWishlist=wishlistItems.some(item=>item.productDetails._id===productId)
+  if(isInWishlist){
+
+setAlreadyWishlistedAlert(
+  { visible:true,message:'Already Wishlisted'}
+ )
+  }
+  setTimeout(() => {
+    setAlreadyWishlistedAlert({
+     visible:false,
+    })
+   }, 1500);
+  if(!isInWishlist)
+{  const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist",{
+    method:'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify(requestData)
+     })
+  
+  const data=await response.json()
+  if(data ){
+    setWishlistTrigger(!wishlistTrigger)
+    setWishlistAlert({visible:true,message:'Wishlisted'})
+  }
+  setTimeout(() => {
+    setWishlistAlert({
+     visible:false,
+    })
+   }, 1500)
+  }
+} catch (error) {
+  console.log(error)
+}
+   }
     return ( <>
     
      <Header/> <main className = "container" > <p >
      {
         alert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alert.message}</span>
     }
+    {
+      alreadyWishlistedAlert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alreadyWishlistedAlert.message}</span>
+    }
+      {
+      wishlistAlert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{wishlistAlert.message}</span>
+    }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products
         </Link>
         &gt; {data
             ?.productName}
     </p>
+    {error && <h2>Failed to get product data</h2>}
     {loading && (
     <div className="text-center py-5">
            <div className="spinner-grow" role="status">
@@ -69,12 +137,16 @@ try {
             ?.imgURL}
             id="productDescImg"
             className="image-fluid"/>
+            
+           
     </div> <div className = "col-md-5" > <h2>{data
             ?.productName}</h2> < p >~ {
         data
             ?.brand
     } </p>
-<p className="fs-4 text-danger-emphasis">{data?.tagline} </p > <span className="fs-5 border px-2">{data
+<p className="fs-4 text-danger-emphasis">{data?.tagline} </p >
+ <div className="d-flex align-content-center justify-content-between"><div>
+ <span className="fs-5 border px-2">{data
             ?.ratings}
         ★</span> <s> ₹ {
         data
@@ -84,6 +156,9 @@ try {
     data
         ?.discountPercentage
 } % off </span>
+ </div>
+ <button className="btn btn-danger mx-3" onClick={()=>handleWishlistClick(data?._id)}>🤍</button>
+ </div>
 <hr/ > <label className="fs-5">Select Your Size From Available Sizes:
 </label> < br /> 
 <form onSubmit={handleSubmit}>{
