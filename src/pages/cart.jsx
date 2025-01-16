@@ -13,16 +13,10 @@ const [quantityAlert,setQuantityAlert]=useState({visible:false,message:''})
 const [moveToWishlistAlert,setMoveToWishlistAlert]=useState({visible:false,message:''})
 const {data:productsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/products")
 console.log(productsData)
-const [addressesData,setAddressesData]=useState([])
+
 const {data:addressData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/address")
 console.log(addressData)
-useEffect(()=>{
-    if(Array.isArray(addressData)){
-        setAddressesData(addressData)
-    }else{
-        setAddressesData([])
-    }
-})
+
 const cartItems = Array.isArray(data) ? data : [];
     const [cartData,setCartData]=useState([])
     
