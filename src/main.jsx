@@ -10,6 +10,8 @@ import Wishlist from './pages/wishlist.jsx'
 import Address from './pages/address.jsx'
 import ChooseAddress from './pages/chooseAddressData.jsx'
 import Profile from './pages/profilePage.jsx'
+import Orders from './pages/orders.jsx'
+import OrderSummary from './pages/orderSummaryPage.jsx'
 
 const router=createBrowserRouter([
   {
@@ -43,6 +45,12 @@ const router=createBrowserRouter([
   },{
     path:"/profile",
     element:<Profile/>
+  },{
+    path:"/orders",
+    element:<Orders/>
+  },{
+    path:"/orders/:orderId",
+    element:<OrderSummary/>
   }
 ])
 createRoot(document.getElementById('root')).render(

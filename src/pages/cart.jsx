@@ -7,14 +7,14 @@ import useFetch from "../../useFetch";
 const Cart = () => {
     const [quantity,setQuantity]=useState({})
    
-const {data, loading, error} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/cart")
+const {data, loading, error} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
 const[deleteItemAlert,setDeleteItemAlert]=useState({visible:false,message:''})
 const [quantityAlert,setQuantityAlert]=useState({visible:false,message:''})
 const [moveToWishlistAlert,setMoveToWishlistAlert]=useState({visible:false,message:''})
-const {data:productsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/products")
+const {data:productsData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/products")
 console.log(productsData)
 
-const {data:addressData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/address")
+const {data:addressData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
 console.log(addressData)
 
 const cartItems = Array.isArray(data) ? data : [];
@@ -37,7 +37,7 @@ const handleQuantityChange=async(cartId,updatedQuantity)=>{
     if(updatedQuantity<1) return;
    
 try{
-    const response=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/cart/${cartId}`,{
+    const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`,{
         method:'POST',
         headers:{
             'content-type':'application/json '
@@ -78,7 +78,7 @@ if (quantity[cartId] >1)
     console.log(error)
     const handleDelete=async(cartId)=>{
 try{
-const response=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/cart/${cartId}`,{
+const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`,{
     method:"DELETE"
 })
 if(!response.ok){
@@ -129,14 +129,14 @@ console.log(error)
          productDetails:productId
         }
 try {
-    const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist",{
+    const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist",{
         method:'POST',
         headers:{
           'content-type':'application/json'
         },
         body:JSON.stringify(requestData)
     })
-    const deleteResponse=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/cart/${cartId}`,{
+    const deleteResponse=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`,{
         method:"DELETE"
     })
     const data=await deleteResponse.json()

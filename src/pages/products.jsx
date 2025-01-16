@@ -20,15 +20,15 @@ const Products = () => {
     const [wishlistItems, setWishlistItems] = useState([]);
     const [wishlistUpdateTrigger, setWishlistUpdateTrigger] = useState(false);
     const {data, loading, error} = useFetch(categoryId === undefined
-        ? "https://e-commerce-backend-ten-gamma.vercel.app/products"
-        : `https://e-commerce-backend-ten-gamma.vercel.app/products/category/${categoryId}`)
+        ? "https://e-commerce-backend-lyart-six.vercel.app/products"
+        : `https://e-commerce-backend-lyart-six.vercel.app/products/category/${categoryId}`)
 
-    const {data: categoriesData} = useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
+    const {data: categoriesData} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/categories")
    
    useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist");
+        const response = await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist");
         const wishListItemsData = await response.json();
         if(Array.isArray(wishListItemsData))
 { setWishlistItems(wishListItemsData)}
@@ -85,7 +85,7 @@ setSize((prev)=>({...prev,[productId]:size}))
         }
       console.log(requestData)
       try {
-       const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",{
+       const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
         method:'POST',
         headers:{
             'content-type':'application/json '
@@ -119,7 +119,7 @@ try {
    setWishlistItemAlreadyExistingAlert({visible:true,message:"Already Wishlisted"})
     }
     setTimeout(()=>setWishlistItemAlreadyExistingAlert({visible:false,message:''}),2000)
- const response   =await fetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist",{
+ const response   =await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist",{
 method:'POST',
 headers:{
     'Content-Type':'application/json'

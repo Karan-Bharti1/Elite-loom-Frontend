@@ -3,8 +3,8 @@ import Header from "../../components/Header"
 import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
 const Wishlist=()=>{
-    const {data,loading,error}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/wishlist")
-    const {data:productsData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/products")
+    const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist")
+    const {data:productsData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/products")
 console.log(productsData)
    const [sizeData,setSizeData]=useState({})
    console.log(sizeData)
@@ -21,7 +21,7 @@ console.log(productsData)
     console.log(wishlistData)
     const handleDelete=async(wishlistId)=>{
 try {
-    const response=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/wishlist/${wishlistId}`,{
+    const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/wishlist/${wishlistId}`,{
         method:'Delete'
     })
     if(!response.ok){
@@ -49,7 +49,7 @@ const requestData={
     quantity:1
 }
 try {
-    const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",{
+    const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -66,7 +66,7 @@ try {
     setTimeout(() => {
       setMoveToCartAlert({visible:false,message:''})  
     }, 1500);
-    const deleteresponse= await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/wishlist/${wishlistId}`,{
+    const deleteresponse= await fetch(`https://e-commerce-backend-lyart-six.vercel.app/wishlist/${wishlistId}`,{
         method:'Delete'
     })
     if(!deleteresponse.ok){

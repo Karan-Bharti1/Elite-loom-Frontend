@@ -5,7 +5,7 @@ import { useState,useEffect } from "react"
 const Profile=()=>{
       const [addressesData,setAddressesData]=useState([])
       const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
-    const {data:addressData}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/address")
+    const {data:addressData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
     useEffect(()=>{
         if(Array.isArray(addressData)){
             setAddressesData(addressData)
@@ -15,7 +15,7 @@ const Profile=()=>{
     },[addressData])
     const handleDelete=async(addressId)=>{
         try {
-            const response=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/address/${addressId}`,{
+            const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/address/${addressId}`,{
                 method:"Delete"
             })
             if(!response.ok){
@@ -78,8 +78,8 @@ const Profile=()=>{
         {displayData}
         <Link className="btn btn-danger" to="/address/profile">Add new Address</Link>
      
-        <p className="pt-3 fs-4">You can view all your orders here:</p>
-        <Link className="btn btn-danger my-3">Order History</Link>
+        <p className="pt-3 fs-4">You can view your all orders here:</p>
+        <Link className="btn btn-danger my-3" to="/orders">Order History</Link>
         <p className="pt-3 fs-4">Additional Details:</p>
         <div className="card p-2 px-4 my-4">
             <div className="row">

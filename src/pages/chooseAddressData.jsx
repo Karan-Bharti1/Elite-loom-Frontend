@@ -5,17 +5,12 @@ import { Link } from "react-router-dom"
 const ChooseAddress=()=>{
     const [addressesData,setAddressesData]=useState([])
     const [cartsData,setCartsData]=useState([])
-const {data:addressData,loading}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/address")
+const {data:addressData,loading}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
 const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
-const {data:cartData , loading:cartLoading}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/cart")
-
-
+const {data:cartData , loading:cartLoading}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
 const [selectedAddress,setSelectedAddress]=useState("")
-
 const [result,setResult]=useState()
 const [selectAddressAlert,setSelectAddressAlert]=useState({visible:false,message:""})
-
-
 useEffect(()=>{
     if(Array.isArray(addressData)){
         setAddressesData(addressData)
@@ -30,23 +25,23 @@ useEffect(()=>{
         setCartsData([])
     }
 },[cartData])
-
-
 const displayCart=cartsData.map(item=>(
     <li key={item._id} className="list-group-item">
-    <span>{item.productDetails.productName}{" "}Price: <s> ₹{item.productDetails.price}</s> ₹ {item.productDetails.price-(item.productDetails.price*(item.productDetails.discountPercentage/100))}/- <span className="text-danger fw-bold">{item.productDetails.discountPercentage}% off</span> X {item.quantity} </span>
+    <span>{item.productDetails.productName}-{" "}Size: {item.selectedSize} Price: <s> ₹{item.productDetails.price}</s> ₹ {item.productDetails.price-(item.productDetails.price*(item.productDetails.discountPercentage/100))}/- <span className="text-danger fw-bold">{item.productDetails.discountPercentage}% off</span> X {item.quantity} </span>
     </li>
 ))
 const subtotal=cartsData?.reduce((acc,curr)=>acc+(curr.productDetails.price-(curr.productDetails.price*curr.productDetails.discountPercentage)/100)*curr.quantity,0)
 
 const ordersData=cartsData.map(item=>({
     quantity:item.quantity,
-    productDetails:item.productDetails._id
+    productDetails:item.productDetails._id,
+    selectedSize:item.selectedSize
 }))
+console.log(ordersData)
 
 const handleDelete=async(addressId)=>{
 try {
-    const response=await fetch(`https://e-commerce-backend-ten-gamma.vercel.app/address/${addressId}`,{
+    const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/address/${addressId}`,{
         method:"Delete"
     })
     if(!response.ok){
@@ -76,7 +71,7 @@ const displayData=addressesData.map(address=>(
     </p>
     <p>Pincode: {address.pincode}</p>
     </label>
-    <div className=" d-flex justify-content-end">
+    <div className="d-flex justify-content-end">
     <button className="btn btn-close" onClick={()=>handleDelete(address._id)}></button>
     </div>
   
@@ -88,7 +83,7 @@ const handleCheckout=async()=>{
         address:selectedAddress,
         items:ordersData
     }
-  if(selectedAddress.length>0){  const response=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/orders",{
+  if(selectedAddress.length>0){  const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/orders",{
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -101,7 +96,7 @@ if(!response.ok){
 const data=await response.json()
 if(data){
     setResult(data)
-    const deleteResponse=await fetch("https://e-commerce-backend-ten-gamma.vercel.app/cart",{
+    const deleteResponse=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
         method:"Delete"
     })
     if(!deleteResponse.ok){
@@ -109,7 +104,6 @@ if(data){
     }
     const deletedData=await deleteResponse.json()
     if(deletedData){
-        
         setCartsData([])
     }
 }
@@ -119,7 +113,7 @@ if(data){
     }
 }
 console.log(result)
-const {data:lastOrder}=useFetch(`https://e-commerce-backend-ten-gamma.vercel.app/order/${result?._id}`)
+const {data:lastOrder}=useFetch(`https://e-commerce-backend-lyart-six.vercel.app/order/${result?._id}`)
 console.log(lastOrder)
 
 

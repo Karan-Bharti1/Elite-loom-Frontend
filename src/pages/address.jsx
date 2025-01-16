@@ -115,7 +115,7 @@ const handleSubmit=async(event)=>{
 event.preventDefault()
 console.log(addressData)
 try {
-   const response=await fetch ("https://e-commerce-backend-ten-gamma.vercel.app/address",{
+   const response=await fetch ("https://e-commerce-backend-lyart-six.vercel.app/address",{
     method:'POST',
     headers:{
         'Content-Type':'application/json'

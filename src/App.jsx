@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 
 function App() {
-  const {data,loading,error}=useFetch("https://e-commerce-backend-ten-gamma.vercel.app/categories")
+  const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/categories")
   console.log(data)
 const displayData=data?.map(category=>(
   <>
