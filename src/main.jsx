@@ -33,7 +33,10 @@ const router=createBrowserRouter([
     element:<Wishlist/>
   },{
     path:"/address",
-    element:<Address/>
+    element:<Address profile={false}/>
+  },{
+    path:"/address/profile",
+    element:<Address profile={true}/>
   },{
     path:"/chooseaddress",
     element:<ChooseAddress/>

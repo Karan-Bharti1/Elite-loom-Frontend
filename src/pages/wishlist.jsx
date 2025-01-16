@@ -145,7 +145,7 @@ return(
     <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>/<Link className="btn " to="/wishlist">Wishlist</Link>
     {deleteWishlistAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{deleteWishlistAlert.message}</span>}
     {moveToCartAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToCartAlert.message}</span>}
-  {  !loading &&    <h1 className=" fs-2 py-3">My Wishlist ({wishlistData.length} Items)</h1>}
+  {  !loading &&    <h1 className=" fs-2 py-3 ">My Wishlist ({wishlistData.length} {wishlistData.length===1?"item":"items"})</h1>}
         {error && <h2>No Items in Wishlist</h2>}
         {loading && (
     <div className="text-center py-5">

@@ -2,7 +2,8 @@ import Header from "../../components/Header";
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
-const AddressForm = ({ addressData, handleChange, handleSubmit }) => (
+const AddressForm = ({ addressData, handleChange, handleSubmit,profile }) => (
+ 
     <form onSubmit={handleSubmit}>
       <label htmlFor="receiverName">Receiver's Name:</label>
       <input
@@ -86,10 +87,11 @@ const AddressForm = ({ addressData, handleChange, handleSubmit }) => (
       />
       <button className="btn btn-danger" type="submit">
         Save
-      </button><Link to="/chooseaddress" className="btn btn-danger mx-3">Proceed</Link>
+      </button>{profile?<Link className="btn btn-danger m-3" to="/profile">Back To Profile</Link>:<Link to="/chooseaddress" className="btn btn-danger m-3">Proceed</Link>}
     </form>
   );
-const Address=()=>{
+const Address=({profile})=>{
+ 
     const [addressData,setAddressData]=useState({
         recieversName:"",
         recieversMobile:"",
@@ -146,6 +148,7 @@ return(<>
               addressData={addressData}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
+              profile={profile}
             />
         </div>
       
