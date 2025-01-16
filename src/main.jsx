@@ -9,6 +9,7 @@ import Cart from './pages/cart.jsx'
 import Wishlist from './pages/wishlist.jsx'
 import Address from './pages/address.jsx'
 import ChooseAddress from './pages/chooseAddressData.jsx'
+import Profile from './pages/profilePage.jsx'
 
 const router=createBrowserRouter([
   {
@@ -36,6 +37,9 @@ const router=createBrowserRouter([
   },{
     path:"/chooseaddress",
     element:<ChooseAddress/>
+  },{
+    path:"/profile",
+    element:<Profile/>
   }
 ])
 createRoot(document.getElementById('root')).render(

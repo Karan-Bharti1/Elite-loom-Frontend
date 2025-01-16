@@ -17,9 +17,10 @@ return(
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup" >
           <div className="navbar-nav ms-auto mb-2 mb-lg-0 " >
           
-        <NavLink className="nav-link display-2 px-4">Login</NavLink>
+       
         <NavLink className="nav-link display-2 px-4" to="/wishlist">♡ Wishlist</NavLink>
         <NavLink to="/cart" className="nav-link display-2 px-4">🛒Cart</NavLink>
+        <NavLink to="/profile" className="nav-link display-2 px-4">👤My  Profile</NavLink>
           </div>
         </div>
       </div>
