@@ -114,7 +114,7 @@ setAlreadyWishlistedAlert(
         &gt; {data
             ?.productName}
     </p>
-    {error && <h2>Failed to get product data</h2>}
+   
     {loading && (
     <div className="text-center py-5">
            <div className="spinner-grow" role="status">
@@ -131,7 +131,10 @@ setAlreadyWishlistedAlert(
   </div>
     </div>
  
- )} {!loading &&<div className = "row" > <div className="col-md-7">
+ )}
+    {error && <h2 className="text-center">Failed to get product data</h2>}
+  {!loading && !error &&<div className = "row" > <div className="col-md-7">
+
         <img
             src={data
             ?.imgURL}

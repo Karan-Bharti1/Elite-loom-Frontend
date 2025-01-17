@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 const ChooseAddress=()=>{
     const [addressesData,setAddressesData]=useState([])
     const [cartsData,setCartsData]=useState([])
-const {data:addressData,loading}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
+const {data:addressData,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
 const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
-const {data:cartData , loading:cartLoading}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
+const {data:cartData , loading:cartLoading,error:cartError}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
 const [selectedAddress,setSelectedAddress]=useState("")
 const [result,setResult]=useState()
 const [selectAddressAlert,setSelectAddressAlert]=useState({visible:false,message:""})
@@ -128,15 +128,19 @@ console.log(lastOrder)
         <div className="row">
             <div className="col-md-6 w-50">
             <h1 className="fs-2 py-3">Choose Delivery Address</h1>
-            {!loading && addressesData.length===0&& <h1 className="fs-2 py-5">To choose address,please add new address first</h1>}
+            {error && <h2 className="py-2">Failed to fetch address data.</h2>}
+            {!loading  && !error && addressesData.length===0&& <h1 className="fs-2 py-5">To choose address,please add new address first</h1>}
+   
     {
         displayData
     }
 <Link to="/address" className="btn btn-danger ">Add new address</Link>
     </div>
             <div className="col-md-6">
- {cartsData.length>0 && (<><h1 className="fs-2 py-3">Confirm Your Order</h1>
+                {cartError && <h2 className="py-2">Fail to get order confirmation data.</h2>}
+ {cartsData.length>0 && !cartError && (<><h1 className="fs-2 py-3">Confirm Your Order</h1>
 <ul className="list-group">
+    {cartError && <h2 className="py-2">Failed to fetch order confirmation data</h2>}
 {displayCart}
 </ul>
 <Link to="/cart" className="btn btn-danger p-1 my-3">Edit Your Order</Link>
@@ -146,12 +150,12 @@ console.log(lastOrder)
             </div>
         </div></>)
 }
-{  cartsData.length===0   && !cartLoading && (
+{  cartsData.length===0 &&!cartError    && !cartLoading && (
         <>
        <p className="fs-2 pt-4">Your Order has been placed successfully.</p>
        <div className="">
       
-       {result &&(<>
+       {result  &&(<>
        <p className="fs-3 pt-4">Your Order's Summary:</p>
         <ul className="list-group">
        {lastOrder?.items.map(item=>(

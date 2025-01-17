@@ -206,7 +206,7 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     {moveToWishlistAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToWishlistAlert.message}</span>}
     <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products" className=" btn ">Products
  </Link>/ <Link className = "btn" to = "/cart" > Cart </Link>
- {error && <h2>No Items in Cart</h2>}
+ {error && <h2 className="text-center py-2">Fail to fetch cart items</h2>}
  {loading && (
     <div className="text-center py-5">
            <div className="spinner-grow" role="status">
@@ -224,7 +224,7 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     </div>
  
  )}
-{!loading && cartData.length>0 &&<div className="row">
+{!loading && !error&& cartData.length>0 &&<div className="row">
 <div className="col-md-6">
     <div className="fs-2 py-3 text-center">Cart Items</div >
     {cartItems.length===0 && loading  && <h2 className="text-center">No items in the cart!</h2>}

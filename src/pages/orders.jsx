@@ -3,7 +3,7 @@ import useFetch from "../../useFetch";
 import { useEffect,useState } from "react";
 import {Link} from "react-router-dom"
 const Orders=()=>{
-    const {data,loading}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/orders")
+    const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/orders")
     const [ordersData,setOrdersData]=useState([])
     console.log(data)
     useEffect(()=>{
@@ -44,13 +44,32 @@ if(Array.isArray(data)){
     return(<>
     <Header/>
     <main className="container">
+        
     <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>/<Link className="btn" to="/profile">My Profile</Link>/<Link className="btn" to="/orders">My Orders</Link>
-        <h2 className="fs-2 py-3">My Orders</h2>
+    {loading  &&(
+    <div className="text-center py-5">
+           <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+  <div className="spinner-grow" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+    </div>
+ 
+ ) }
+{error && <h2 className="text-center">Failed to fetch orders data.</h2>}
+     { !loading&& !error &&( <><h2 className="fs-2 py-3">My Orders</h2>
       
         <ul className="list-group my-4">
         {displayData}
-        </ul>
-       
+        </ul></>)
+       }
     </main>
     </>)
 }

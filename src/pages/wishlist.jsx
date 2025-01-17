@@ -146,7 +146,7 @@ return(
     {deleteWishlistAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{deleteWishlistAlert.message}</span>}
     {moveToCartAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToCartAlert.message}</span>}
   {  !loading &&    <h1 className=" fs-2 py-3 ">My Wishlist ({wishlistData.length} {wishlistData.length===1?"item":"items"})</h1>}
-        {error && <h2>No Items in Wishlist</h2>}
+        {error && <h2 className="fs-2 text-center">Error while loading wishlist data</h2>}
         {loading && (
     <div className="text-center py-5">
            <div className="spinner-grow" role="status">

@@ -33,7 +33,8 @@ const OrderSummary=()=>{
     <Header/>
     <main className="container">
     <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>/<Link className="btn" to="/profile">My Profile</Link>/<Link className="btn" to="/orders">My Orders</Link>
-       {!loading &&(<><h2 className="fs-2 py-3 text-center">Order Summary</h2>
+    {error && <h2 className="text-center">Failed to fetch order summary.</h2>}
+       {!loading && !error &&(<><h2 className="fs-2 py-3 text-center">Order Summary</h2>
        
 <div className="d-flex justify-content-between fs-4"><span>
     Order Id: {data?._id}</span> <span>Dated: {convertToIST(data?.updatedAt)}</span>

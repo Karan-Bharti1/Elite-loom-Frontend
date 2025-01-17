@@ -5,7 +5,7 @@ import { useState,useEffect } from "react"
 const Profile=()=>{
       const [addressesData,setAddressesData]=useState([])
       const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
-    const {data:addressData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
+    const {data:addressData,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
     useEffect(()=>{
         if(Array.isArray(addressData)){
             setAddressesData(addressData)
@@ -77,6 +77,7 @@ const Profile=()=>{
      
         <p className="pt-4 fs-4" >Your saved Addresses: </p>
         {displayData}
+        {error&& <h2 className="text-center fs-4">Failed to load address data</h2>}
         <Link className="btn btn-danger" to="/address/profile">Add new Address</Link>
      
         <p className="pt-3 fs-4">You can view your all orders here:</p>
