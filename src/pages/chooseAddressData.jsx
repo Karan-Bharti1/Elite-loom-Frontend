@@ -167,6 +167,7 @@ console.log(lastOrder)
    Delivers to:{" "} {lastOrder?.address}
     </p></>)}
      <Link to="/" className="btn btn-danger">Back to Home</Link>
+     <Link className="btn btn-danger mx-2" to="/orders"> Order History</Link>
        </div>
         
         </>
