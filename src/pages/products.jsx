@@ -12,6 +12,7 @@ const Products = () => {
         setRatingRange] = useState(2)
     const [categoryCheckbox,
         setCategoryCheckbox] = useState([])
+        const [searchTerm,setSearchTerm]=useState('')
     const [size,setSize]=useState({})
     const [alert,setAlert]=useState({visible:false,message:''})
     const[wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
@@ -64,8 +65,10 @@ const Products = () => {
         ?.filter(product => {
             const matchesGenderFilter = genderFilter === "All" || product.gender === genderFilter
             const matchesRatingRange = product.ratings > ratingRange
+           const matchesSearch=searchTerm===""||product.brand.toLowerCase().includes(searchTerm.toLowerCase())||
+           product.category.categoryName.toLowerCase().includes(searchTerm.toLowerCase())||product.productName.toLowerCase().includes(searchTerm.toLowerCase())||product.details?.some(detail=>detail.toLowerCase().includes(searchTerm.toLowerCase()))
             const matchesCategoryData = categoryCheckbox.length === 0 || categoryCheckbox.includes(product.category.categoryName);
-            return matchesGenderFilter && matchesRatingRange && matchesCategoryData
+            return matchesGenderFilter && matchesRatingRange && matchesCategoryData && matchesSearch
         })
     if (sortData === "lowToHigh") {
         filteredData.sort((a, b) => a.price - b.price)
@@ -198,7 +201,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
     )
     return ( <>
 
-                    < Header /> <main className="container">
+                    < Header setSearchTerm={setSearchTerm} /> <main className="container">
                     {alert.visible && (
                         <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3"  role="alert">
                         Item added to cart successfully
