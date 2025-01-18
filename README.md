@@ -27,7 +27,7 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 
 
 
-- Shop by categories on product page
+- Shop by categories on Landing page
 - Add to wishlist
 - Delete From wishlist
 - Move From Wishlist to cart
@@ -49,13 +49,16 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 - My Profile page with addesss handling and orders history
 - Responsive header
 - Search term functionality 
-
+- Filter By Gender
+- Filter by Price
+- -Ratings Slider
+- Categories Checkbox Filter
 ## Screenshots
 
 
 ![Home Page](https://github.com/user-attachments/assets/f0e7e499-92df-4eb3-95ac-05a3afe2b40b)
 ![image](https://github.com/user-attachments/assets/c720aea6-c8ce-4d36-8bb6-21ee54db1172)
-#Home Page
+# Home Page
 
 
 
