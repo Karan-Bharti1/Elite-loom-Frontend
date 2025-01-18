@@ -54,6 +54,8 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 
 
 ![Home Page](https://github.com/user-attachments/assets/f0e7e499-92df-4eb3-95ac-05a3afe2b40b)
+![image](https://github.com/user-attachments/assets/c720aea6-c8ce-4d36-8bb6-21ee54db1172)
+#Home Page
 
 
 
