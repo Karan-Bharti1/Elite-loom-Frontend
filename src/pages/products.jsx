@@ -3,7 +3,8 @@ import Header from "../../components/Header";
 import useFetch from "../../useFetch";
 import {Link} from "react-router-dom";
 import {useState,useEffect} from "react";
-const Products = () => {
+import Footer from "../../components/Footer";
+ export const Products = ({searchTerm}) => {
     const [sortData,
         setSortData] = useState("All")
     const [genderFilter,
@@ -12,7 +13,7 @@ const Products = () => {
         setRatingRange] = useState(2)
     const [categoryCheckbox,
         setCategoryCheckbox] = useState([])
-        const [searchTerm,setSearchTerm]=useState('')
+       
     const [size,setSize]=useState({})
     const [alert,setAlert]=useState({visible:false,message:''})
     const[wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
@@ -201,7 +202,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
     )
     return ( <>
 
-                    < Header setSearchTerm={setSearchTerm} /> <main className="container">
+                     <main className="container">
                     {alert.visible && (
                         <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3"  role="alert">
                         Item added to cart successfully
@@ -320,7 +321,15 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
 
             </div>
         </div>
-    </main> </>
+    </main>
+    <Footer/> </>
 )
 }
-export default Products;
+const DisplayProducts=()=>{
+    const [searchTerm,setSearchTerm]=useState('')
+    return(<>
+    <Header setSearchTerm={setSearchTerm} searchBar={true} />
+    <Products searchTerm={searchTerm}/></>)
+
+}
+export default DisplayProducts;

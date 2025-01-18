@@ -6,6 +6,7 @@ import useFetch from '../useFetch'
 import Header from '../components/Header'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
+import { Products } from './pages/products'
 
 function App() {
   const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/categories")
@@ -27,7 +28,7 @@ const displayData=data?.map(category=>(
 ))
   return (
     <>
-  <Header/>
+ 
   <main>
     <div className='container '>
 
@@ -54,6 +55,7 @@ const displayData=data?.map(category=>(
 <div className='container text-center py-4 display-5'> Top Categories to choose from...</div>
 <section className='container text-center'>
   <div className='row container'>
+    {error && <h2>Failed to fetch category data</h2>}
 {displayData}
 </div>
 </section>
@@ -109,5 +111,12 @@ const displayData=data?.map(category=>(
     </>
   )
 }
-
-export default App
+const Home=()=>{
+  const [searchTerm,setSearchTerm]=useState('')
+  return(<>
+  <Header setSearchTerm={setSearchTerm} searchBar={true} />
+  {searchTerm.length===0 && <App/>}
+  {searchTerm.length>0 && <Products searchTerm={searchTerm}/>}
+  </>)
+}
+export default Home

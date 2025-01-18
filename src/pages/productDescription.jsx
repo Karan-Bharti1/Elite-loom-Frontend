@@ -3,10 +3,12 @@ import Header from "../../components/Header"
 import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
 import { useEffect, useState } from "react"
+import Footer from "../../components/Footer"
+import {Products} from "./products"
 const ProductDescription = () => {
     const [size,setSelectedSize]=useState()
     const {productId} = useParams()
-    console.log(size)
+    
     const [alert,setAlert]=useState({visible:false,message:''})
     const [wishlistTrigger,setWishlistTrigger]=useState(false)
     const [wishlistItems,setWishlistItems]=useState([])
@@ -99,7 +101,7 @@ setAlreadyWishlistedAlert(
    }
     return ( <>
     
-     <Header/> <main className = "container" > <p >
+      <main className = "container" > <p >
      {
         alert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alert.message}</span>
     }
@@ -189,6 +191,15 @@ data?.features
 data?.gender
 } </p>
 <p>Exhange Policy: {data?.exchangePolicy}</p > </div> </div>}
-</main > </>)
+</main > 
+</>)
 }
-export default ProductDescription
+const Details=()=>{
+const [searchTerm,setSearchTerm]=useState("")
+return(<>
+<Header searchBar={true} setSearchTerm={setSearchTerm}/>
+{searchTerm.length===0 && <ProductDescription/>}
+{searchTerm.length>1 && <Products searchTerm={searchTerm}/>}
+</>)
+}
+export default Details;

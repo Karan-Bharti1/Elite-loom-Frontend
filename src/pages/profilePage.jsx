@@ -2,6 +2,8 @@ import Header from "../../components/Header"
 import { Link } from "react-router-dom"
 import useFetch from "../../useFetch"
 import { useState,useEffect } from "react"
+import Footer from "../../components/Footer"
+import { Products } from "./products"
 const Profile=()=>{
       const [addressesData,setAddressesData]=useState([])
       const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
@@ -53,7 +55,7 @@ const Profile=()=>{
     ))
     return(
         <>
-        <Header/>
+      
         <main className="container">
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>/<Link className="btn" to="/profile">My Profile</Link>
         {addressDeleteAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{addressDeleteAlert.message}</span>}
@@ -98,7 +100,17 @@ const Profile=()=>{
             
         </div>
         </main>
+        <Footer/>
         </>
     )
 }
-export default Profile
+const ProfilePage=()=>{
+    const [searchTerm,setSearchTerm]=useState('')
+    return(<>
+      <Header setSearchTerm={setSearchTerm} searchBar={true}/>
+      {searchTerm.length===0 && <Profile/>}
+      {searchTerm.length>0 && <Products searchTerm={searchTerm}/>}
+
+    </>)
+}
+export default ProfilePage

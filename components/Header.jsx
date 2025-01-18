@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-const Header=({setSearchTerm})=>{
+const Header=({searchBar,setSearchTerm})=>{
 return(
     <header >
         <div className="container">
@@ -8,7 +8,7 @@ return(
       <div className="container-fluid" >
         <NavLink className="navbar-brand text-danger fs-2 fw-bold   fst-italic px-3" to="/">Elite Loom</NavLink>
        
-  <input type="text" className="d-flex justify-content-center" onChange={event=>setSearchTerm(event.target.value)}  placeholder="Search..."/>
+ { searchBar &&<input type="text" className="d-flex justify-content-center" onChange={event=>setSearchTerm(event.target.value)}  placeholder="Search..."/>}
  
 
         <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

@@ -2,21 +2,25 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import {createBrowserRouter,RouterProvider} from "react-router-dom"
-import App from './App.jsx'
+
 import Products from './pages/products.jsx'
-import ProductDescription from './pages/productDescription.jsx'
+
 import Cart from './pages/cart.jsx'
-import Wishlist from './pages/wishlist.jsx'
+
 import Address from './pages/address.jsx'
 import ChooseAddress from './pages/chooseAddressData.jsx'
-import Profile from './pages/profilePage.jsx'
+
 import Orders from './pages/orders.jsx'
 import OrderSummary from './pages/orderSummaryPage.jsx'
+import Details from './pages/productDescription.jsx'
+import Home from './App.jsx'
+import ProfilePage from './pages/profilePage.jsx'
+import WishlistPage from './pages/wishlist.jsx'
 
 const router=createBrowserRouter([
   {
     path:"/",
-    element:<App/>
+    element:<Home/>
   },{
     path:"/products",
     element:<Products/>
@@ -26,13 +30,13 @@ const router=createBrowserRouter([
     element:<Products/>
   },{
     path:"/products/product/:productId",
-    element:<ProductDescription/>
+    element:<Details/>
   },{
     path:"/cart",
     element:<Cart/>
   },{
     path:"/wishlist",
-    element:<Wishlist/>
+    element:<WishlistPage/>
   },{
     path:"/address",
     element:<Address profile={false}/>
@@ -44,7 +48,7 @@ const router=createBrowserRouter([
     element:<ChooseAddress/>
   },{
     path:"/profile",
-    element:<Profile/>
+    element:<ProfilePage/>
   },{
     path:"/orders",
     element:<Orders/>
