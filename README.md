@@ -21,6 +21,12 @@ Hi there! 👋.
 I am currently learning Full Stack Web Development with a focus on the MERN stack (MongoDB, Express.js, React, and Node.js). I'm passionate about building dynamic, user-friendly web applications and continuously improving my skills.
 
 
+## Tech Stack
+
+**Client:** React, Bootstrap
+
+**Server:** Node, Express
+
 
 
 ## Key Features
@@ -51,7 +57,7 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 - Search term functionality 
 - Filter By Gender
 - Filter by Price
-- -Ratings Slider
+- Ratings Slider
 - Categories Checkbox Filter
 ## Screenshots
 
