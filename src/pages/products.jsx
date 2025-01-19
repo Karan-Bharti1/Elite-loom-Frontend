@@ -256,7 +256,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         name="gender"
                         onChange={(event) => setGenderFilter(event.target.value)}
                         id="male"/>
-                        For Him</label>
+                         For Him</label>
                     <br/>
                     <label htmlFor="female"><input
                         type="radio"
@@ -264,7 +264,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         onChange={(event) => setGenderFilter(event.target.value)}
                         name="gender"
                         id="female"/>
-                        For Her</label>
+                         For Her</label>
                     <br/>
                     <label htmlFor="unisex"><input
                         type="radio"
@@ -272,7 +272,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         onChange={(event) => setGenderFilter(event.target.value)}
                         name="gender"
                         id="unisex"/>
-                        Unisex</label>
+                         Unisex</label>
                     <br/>
                     <label htmlFor="customRange2" className="form-label text-danger">Rating ★ :</label>
                     <input
@@ -305,14 +305,14 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         name="price"
                         onChange={handleSort}
                         value="lowToHigh"/>
-                        Low To High</label><br/>
+                         Low To High</label><br/>
                     <label htmlFor="highToLow"><input
                         type="radio"
                         id="highToLow"
                         name="price"
                         onChange={handleSort}
                         value="highToLow"/>
-                        High To Low</label><br/>
+                         High To Low</label><br/>
 
                     <button
                         className="btn btn-danger my-4"

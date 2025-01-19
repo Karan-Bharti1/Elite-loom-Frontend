@@ -13,8 +13,8 @@ function App() {
   console.log(data)
 const displayData=data?.map(category=>(
   <>
-  <div className='col-md-2 my-2' key={category._id}>
-    <div className='card'>
+  <div className='col-md-2 my-2 ' key={category._id}>
+    <div className="card border-0">
     <img src={category.categoryImageURL} className="card-img-top " id="category-card" alt="..."/> 
     <div className="card-img-overlay d-flex flex-column justify-content-end">
         
@@ -34,7 +34,7 @@ const displayData=data?.map(category=>(
 
 </div>
 <section className="container">
-  <div className="card text-bg-dark">
+  <div className="card text-bg-dark border-0">
     <img
       className="img-fluid"
       id="introductoryImg"
