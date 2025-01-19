@@ -58,7 +58,7 @@ const Profile=()=>{
       
         <main className="container">
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>/<Link className="btn" to="/profile">My Profile</Link>
-        {addressDeleteAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{addressDeleteAlert.message}</span>}
+        {addressDeleteAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{addressDeleteAlert.message}</span>}
             <h2 className="text-center fs-2 py-3 fw-bolder text-danger">My Profile</h2>
             <div className="card">
             <div className="row m-3">

@@ -204,18 +204,18 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
 
                      <main className="container">
                     {alert.visible && (
-                        <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3"  role="alert">
+                        <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3"  role="alert">
                         Item added to cart successfully
                       </span>
                     )}
                     {
                         wishlistAlert.visible && (
-                            <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistAlert.message}</span>
+                            <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistAlert.message}</span>
                         )
                     }
                     {
                         wishlistItemAlreadyExistingAlert.visible && (
-                            <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistItemAlreadyExistingAlert.message}</span>
+                            <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistItemAlreadyExistingAlert.message}</span>
                         )
                     }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>

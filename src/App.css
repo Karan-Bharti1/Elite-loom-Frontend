@@ -3,7 +3,7 @@
 }
 #category-card{
     height:300px;
-   
+   width: 100;
     object-fit: cover;
 }
 #home-load-placeholder{
@@ -45,4 +45,7 @@
     height:80px;
     width:80px;
     object-fit:cover; 
+}
+#alert{
+    z-index: 9999;
 }

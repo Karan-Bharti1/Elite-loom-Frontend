@@ -120,9 +120,9 @@ console.log(lastOrder)
     return (<>
     <Header/>
     <main className="container">
-   { !loading && cartsData.length>0 &&(<> {addressDeleteAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{addressDeleteAlert.message}</span>}
+   { !loading && cartsData.length>0 &&(<> {addressDeleteAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{addressDeleteAlert.message}</span>}
     {
-      selectAddressAlert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{selectAddressAlert.message}</span>
+      selectAddressAlert.visible && <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{selectAddressAlert.message}</span>
     }
                 
         <div className="row">

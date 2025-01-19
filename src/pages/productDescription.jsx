@@ -103,13 +103,13 @@ setAlreadyWishlistedAlert(
     
       <main className = "container" > <p >
      {
-        alert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alert.message}</span>
+        alert.visible && <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alert.message}</span>
     }
     {
-      alreadyWishlistedAlert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alreadyWishlistedAlert.message}</span>
+      alreadyWishlistedAlert.visible && <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{alreadyWishlistedAlert.message}</span>
     }
       {
-      wishlistAlert.visible && <span className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{wishlistAlert.message}</span>
+      wishlistAlert.visible && <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{wishlistAlert.message}</span>
     }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products
         </Link>

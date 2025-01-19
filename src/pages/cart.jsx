@@ -198,12 +198,12 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     
     return ( <> <Header/>
     {
-      deleteItemAlert.visible&& <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{deleteItemAlert.message}</span>
+      deleteItemAlert.visible&& <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{deleteItemAlert.message}</span>
     } 
     {
-        quantityAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{quantityAlert.message}</span>
+        quantityAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{quantityAlert.message}</span>
     }
-    {moveToWishlistAlert.visible && <span className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToWishlistAlert.message}</span>}
+    {moveToWishlistAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{moveToWishlistAlert.message}</span>}
     <main className = "container" > <Link className="btn" to="/">Home</Link>/<Link to="/products" className=" btn ">Products
  </Link>/ <Link className = "btn" to = "/cart" > Cart </Link>
  {error && <h2 className="text-center py-2">Fail to fetch cart items</h2>}
