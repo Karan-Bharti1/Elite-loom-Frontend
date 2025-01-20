@@ -155,13 +155,13 @@ return newQuanities
 }
     }
     const displayCartItems =  cartData?.map((item) => (
-            <div key={item._id} className="row mb-3 border">
-                <div className="col-md-5">
+            <div key={item._id} className="row my-3 border-0">
+                <div className="col-md-3 text-center py-1">
                     <Link to={`/products/product/${item.productDetails._id}`}>
                     <img src={item.productDetails.imgURL} className="img-fluid" id="cart-image"/></Link>
                    
                 </div>
-                <div className="col-md-7">
+                <div className="col-md-8 text-center py-1">
                     <div className="fs-4">{item.productDetails.productName}</div>
                     <div>~ {item.productDetails.brand}</div>
                     <p>
@@ -190,7 +190,7 @@ return newQuanities
             </div>
         ))
         const displayProductDetails=cartData?.map(item => (
-            <p key={item._id} className="fs-5  pt-3 text-center">
+            <p key={item._id} className="fs-5  pt-3 p-1 text-center">
 Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price - (item.productDetails.price * item.productDetails.discountPercentage) / 100) * quantity[item._id]}
 </p>
         ))
@@ -229,8 +229,8 @@ Total Price of {item.productDetails.productName}: ₹{(item.productDetails.price
     <div className="fs-2 py-3 text-center">Cart Items</div >
     {cartItems.length===0 && loading  && <h2 className="text-center">No items in the cart!</h2>}
      {displayCartItems} </div>
-<div className="col-md-6 px-5">
-    <div className="border border-2 mt-5">
+<div className="col-md-6 ">
+    <div className="border-0 mt-5">
     <div className="fs-2 text-center">
 Price Details
 </div > <div >
@@ -241,7 +241,7 @@ Price Details
         {displayProductDetails}
             
             <hr/>
-            <h4 className="text-center">Sub-Total: ₹ {subtotal}</h4>
+            <h4 className="text-center">Sub-Total: ₹ {subtotal}/-</h4>
     </div> </div>
     <div className="text-center py-4">
   <Link className="btn btn-danger" to="/chooseaddress">Select Address</Link>

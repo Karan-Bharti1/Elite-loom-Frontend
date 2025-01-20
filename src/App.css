@@ -27,9 +27,10 @@
     object-fit:scale-down;
 }
 #cart-image{
-    height:250px;
-    width:80%;
-    object-fit: cover;
+    max-height:400px;
+    
+    width: 100%;
+    object-fit:contain;
 }
 #wishlist-cards-image{
     height:300px;

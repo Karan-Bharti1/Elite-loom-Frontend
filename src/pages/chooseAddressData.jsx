@@ -125,8 +125,8 @@ console.log(lastOrder)
       selectAddressAlert.visible && <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3 rounded">{selectAddressAlert.message}</span>
     }
                 
-        <div className="row">
-            <div className="col-md-6 w-50">
+        <div className="row py-3">
+            <div className="col-md-6 ">
             <h1 className="fs-2 py-3">Choose Delivery Address</h1>
             {error && <h2 className="py-2">Failed to fetch address data.</h2>}
             {!loading  && !error && addressesData.length===0&& <h1 className="fs-2 py-5">To choose address,please add new address first</h1>}
@@ -159,14 +159,14 @@ console.log(lastOrder)
        <p className="fs-3 pt-4">Your Order's Summary:</p>
         <ul className="list-group">
        {lastOrder?.items.map(item=>(
-        <li  className="list-group-item w-50 fs-5" key={item.productDetails._id} >
+        <li  className="list-group-item w-75 fs-5" key={item.productDetails._id} >
         
              {item.productDetails.productName}: ₹{(item.productDetails.price - (item.productDetails.price * item.productDetails.discountPercentage) / 100) } x {item.quantity}
              
         </li>
        ))}
        </ul>
-       <p className="fs-3 pt-4">Sub-total: ₹{lastOrder?.items.reduce((acc,curr)=>acc+(curr.productDetails.price-(curr.productDetails.price*curr.productDetails.discountPercentage)/100)*curr.quantity,0)}</p>
+       <p className="fs-3 pt-4">Sub-total: ₹{lastOrder?.items.reduce((acc,curr)=>acc+(curr.productDetails.price-(curr.productDetails.price*curr.productDetails.discountPercentage)/100)*curr.quantity,0)}/-</p>
     <p className="fs-5 py-2">
    Delivers to:{" "} {lastOrder?.address}
     </p></>)}
