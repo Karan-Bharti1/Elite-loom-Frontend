@@ -54,7 +54,7 @@ const displayData=data?.map(category=>(
 
 <div className='container text-center py-4 display-5'> Top Categories to choose from...</div>
 <section className='container text-center'>
-  <div className='row container'>
+  <div className='row '>
     {error && <h2>Failed to fetch category data</h2>}
 {displayData}
 </div>
