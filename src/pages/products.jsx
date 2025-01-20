@@ -13,7 +13,7 @@ import Footer from "../../components/Footer";
         setRatingRange] = useState(2)
     const [categoryCheckbox,
         setCategoryCheckbox] = useState([])
-       
+       const [sizeAlert,setSizeAlert]=useState({visible:false,message:''})
     const [size,setSize]=useState({})
     const [alert,setAlert]=useState({visible:false,message:''})
     const[wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
@@ -80,9 +80,15 @@ import Footer from "../../components/Footer";
 setSize((prev)=>({...prev,[productId]:size}))
     }
     console.log(size)
-    const handleSubmit=async(event,productId)=>{
-        event.preventDefault()
+    const handleSubmit=async(productId)=>{
+        if(!size[productId] ){
+            setSizeAlert({visible:true,message:"Please Select a size to continue"})
+            setTimeout(() => setSizeAlert({visible: false, message: ''}), 1500);
+         
+        }
+       
         const requestData={
+          
             selectedSize:size[productId],
             productDetails:productId,
             quantity:1
@@ -173,7 +179,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
 
                     </p><p>{product.ratings} ★</p>
 </div>
-<form onSubmit={(event)=>handleSubmit(event,product._id)}>
+
                     <div className="d-flex justify-content-between align-content-center">
                         <select  required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
                             <option value="">Your Size</option>
@@ -181,9 +187,9 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                                 .sizes
                                 .map(size => ( <> <option>{size}</option> </>))}
                         </select><br/>
-                        <button type="submit" className="btn btn-danger">Add to Cart</button>
+                        <button  className="btn btn-danger" onClick={()=>handleSubmit(product._id)}>Add to Cart</button>
                     </div>
-                </form>      
+              
                 </div>
 
           
@@ -216,6 +222,11 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                     {
                         wishlistItemAlreadyExistingAlert.visible && (
                             <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{wishlistItemAlreadyExistingAlert.message}</span>
+                        )
+                    }
+                    {
+                        sizeAlert.visible && (
+                            <span id="alert" className="bg-danger text-light position-fixed top-10 end-0 p-3 m-3">{sizeAlert.message}</span>
                         )
                     }
         <Link className="btn" to="/">Home</Link>/<Link to="/products" className="btn">Products</Link>
