@@ -81,7 +81,7 @@ setSize((prev)=>({...prev,[productId]:size}))
     }
     console.log(size)
     const handleSubmit=async(productId)=>{
-        if(!size[productId] ){
+        if(!size[productId] && size[productId]===0 ){
             setSizeAlert({visible:true,message:"Please Select a size to continue"})
             setTimeout(() => setSizeAlert({visible: false, message: ''}), 1500);
          
