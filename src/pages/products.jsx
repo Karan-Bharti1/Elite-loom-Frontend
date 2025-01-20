@@ -85,37 +85,39 @@ setSize((prev)=>({...prev,[productId]:size}))
             setSizeAlert({visible:true,message:"Please Select a size to continue"})
             setTimeout(() => setSizeAlert({visible: false, message: ''}), 1500);
          
+        }else{
+            const requestData={
+          
+                selectedSize:size[productId],
+                productDetails:productId,
+                quantity:1
+            }
+          console.log(requestData)
+          try {
+           const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
+            method:'POST',
+            headers:{
+                'content-type':'application/json '
+            },
+            body:JSON.stringify(requestData)
+           })
+      if(!response.ok){
+        throw 'Failed to add item into the cart'
+      }
+      const data=await response.json()
+      if(data){
+        
+       setAlert({visible:true,messsage:"Item Added to Cart Successfuly"})
+      }
+      setTimeout(()=>{
+        setAlert({visible:false,message:''})
+    },3000)
+          } catch (error) {
+           console.log(error)
+          }
         }
        
-        const requestData={
-          
-            selectedSize:size[productId],
-            productDetails:productId,
-            quantity:1
-        }
-      console.log(requestData)
-      try {
-       const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
-        method:'POST',
-        headers:{
-            'content-type':'application/json '
-        },
-        body:JSON.stringify(requestData)
-       })
-  if(!response.ok){
-    throw 'Failed to add item into the cart'
-  }
-  const data=await response.json()
-  if(data){
-    
-   setAlert({visible:true,messsage:"Item Added to Cart Successfuly"})
-  }
-  setTimeout(()=>{
-    setAlert({visible:false,message:''})
-},3000)
-      } catch (error) {
-       console.log(error)
-      }
+      
     }
     const handlewishlistClick=async(productId)=>{
         const requestData={
