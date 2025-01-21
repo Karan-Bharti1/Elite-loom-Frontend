@@ -127,7 +127,7 @@ try {
                         
                             <form className="d-flex justify-content-between align-content-center"  onSubmit={event=>handleSubmit(event,item.productDetails._id,item._id)}>
                           
-                            <select  onClick={event=>handleSize(item.productDetails._id,event.target.value)} required>
+                            <select  onChange={event=>handleSize(item.productDetails._id,event.target.value)} required>
                             <option value="">Your Size</option>
                             {item.productDetails
                                 .sizes

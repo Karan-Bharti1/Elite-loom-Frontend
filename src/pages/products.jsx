@@ -183,7 +183,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
 </div>
 
                     <div className="d-flex justify-content-between align-content-center">
-                        <select  required onClick={(event)=>handleSizeUpdate(product._id,event.target.value)}>
+                        <select  required onChange={(event)=>handleSizeUpdate(product._id,event.target.value)}>
                             <option value="">Your Size</option>
                             {product
                                 .sizes
