@@ -62,17 +62,25 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 ## Screenshots
 
 ### Home Page
-![Home Page](https://github.com/user-attachments/assets/f0e7e499-92df-4eb3-95ac-05a3afe2b40b)
+![image](https://github.com/user-attachments/assets/b18c8de8-cbbe-4f48-b570-e2dbc524170e)
+
 ![image](https://github.com/user-attachments/assets/c720aea6-c8ce-4d36-8bb6-21ee54db1172)
 
 ### Product Page
-![image](https://github.com/user-attachments/assets/0a6b4c1a-6a11-4887-8970-f18b1a820e86)
+![image](https://github.com/user-attachments/assets/d2efee6e-fac6-4cf1-adb7-c1c98251cbd9)
+
+### Product Description Page
+![image](https://github.com/user-attachments/assets/feedc923-da4a-49ed-8f75-c3d9341eb040)
+
+
 
 ### Wishlist Page
-![image](https://github.com/user-attachments/assets/155dbdff-11a6-42d1-8aa2-5f9c25506830)
+![image](https://github.com/user-attachments/assets/d88a5bc4-b1e0-480c-8a36-f827f1a36d8b)
+
 
 ### Cart Page
-![image](https://github.com/user-attachments/assets/4227d73f-7563-48b3-a844-07c04460aaa9)
+![image](https://github.com/user-attachments/assets/e79977d1-2e2a-4465-b3bc-47d28daf1737)
+
 
 ### Choose Address And Checkout
 ![image](https://github.com/user-attachments/assets/a3e0a5d2-75e5-4eaa-ab98-cdbadc54cbb1)
@@ -81,7 +89,8 @@ I am currently learning Full Stack Web Development with a focus on the MERN stac
 ![image](https://github.com/user-attachments/assets/76c455d8-3130-4f04-99eb-59216976ad6b)
 
 ### My Profile
-![image](https://github.com/user-attachments/assets/77e89129-9a6e-48b5-9152-e179b2a3f9ba)
+![image](https://github.com/user-attachments/assets/01dfcf67-84d1-435c-9d90-be062441050e)
+
 ![image](https://github.com/user-attachments/assets/8a53f80d-a807-48f5-a86d-cdeac1ae26cb)
 
 ### Order History
