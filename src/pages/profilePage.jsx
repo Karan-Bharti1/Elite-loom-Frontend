@@ -4,10 +4,12 @@ import useFetch from "../../useFetch"
 import { useState,useEffect } from "react"
 import Footer from "../../components/Footer"
 import { Products } from "./products"
+import API_URL, { profilePictureUrl } from "../Url"
+
 const Profile=()=>{
       const [addressesData,setAddressesData]=useState([])
       const [addressDeleteAlert,setAddressDeleteAlert]=useState({visible:false,message:""})
-    const {data:addressData,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
+    const {data:addressData,error}=useFetch(`${API_URL}address`)
     useEffect(()=>{
         if(Array.isArray(addressData)){
             setAddressesData(addressData)
@@ -17,7 +19,7 @@ const Profile=()=>{
     },[addressData])
     const handleDelete=async(addressId)=>{
         try {
-            const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/address/${addressId}`,{
+            const response=await fetch(`${API_URL}address/${addressId}`,{
                 method:"Delete"
             })
             if(!response.ok){
@@ -63,7 +65,7 @@ const Profile=()=>{
             <div className="card">
             <div className="row m-3">
 <div className="col-md-4 ">
-<img className="img-fluid" src="https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+<img className="img-fluid" src={profilePictureUrl}/>
 </div>
 <div className="col-md-4 ">
 <p className="fs-4 py-2"><strong>Name:</strong> John Doe</p>

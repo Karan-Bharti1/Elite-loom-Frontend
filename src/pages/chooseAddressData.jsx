@@ -2,15 +2,16 @@ import {useState, useEffect} from "react"
 import Header from "../../components/Header"
 import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
+import API_URL from "../Url";
 const ChooseAddress = () => {
     const [addressesData,
         setAddressesData] = useState([])
     const [cartsData,
         setCartsData] = useState([])
-    const {data: addressData, loading, error} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
+    const {data: addressData, loading, error} = useFetch(`${API_URL}address`)
     const [addressDeleteAlert,
         setAddressDeleteAlert] = useState({visible: false, message: ""})
-    const {data: cartData, loading: cartLoading, error: cartError} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
+    const {data: cartData, loading: cartLoading, error: cartError} = useFetch(`${API_URL}cart`)
     const [selectedAddress,
         setSelectedAddress] = useState("")
     const [result,
@@ -51,7 +52,7 @@ const ChooseAddress = () => {
 
     const handleDelete = async(addressId) => {
         try {
-            const response = await fetch(`https://e-commerce-backend-lyart-six.vercel.app/address/${addressId}`, {method: "Delete"})
+            const response = await fetch(`${API_URL}address/${addressId}`, {method: "Delete"})
             if (!response.ok) {
                 throw "Failed to delete address"
             }
@@ -97,7 +98,7 @@ const ChooseAddress = () => {
             items: ordersData
         }
         if (selectedAddress.length > 0) {
-            const response = await fetch("https://e-commerce-backend-lyart-six.vercel.app/orders", {
+            const response = await fetch(`${API_URL}orders`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -110,7 +111,7 @@ const ChooseAddress = () => {
             const data = await response.json()
             if (data) {
                 setResult(data)
-                const deleteResponse = await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart", {method: "Delete"})
+                const deleteResponse = await fetch(`${API_URL}cart`, {method: "Delete"})
                 if (!deleteResponse.ok) {
                     throw "Failed to empty cart"
                 }
@@ -125,7 +126,7 @@ const ChooseAddress = () => {
         }
     }
     console.log(result)
-    const {data: lastOrder} = useFetch(`https://e-commerce-backend-lyart-six.vercel.app/order/${result
+    const {data: lastOrder} = useFetch(`${API_URL}order/${result
         ?._id}`)
     console.log(lastOrder)
 
@@ -186,7 +187,7 @@ const ChooseAddress = () => {
             ?.address
     } </p></>)
 } <Link to = "/" className = "btn btn-danger" > Back to Home </Link>
-     <Link className="btn btn-danger mx-2" to="/orders "> Order History</Link>
+     <Link className="btn btn-danger mx-2" to="/orders"> Order History</Link>
  </div>
         
         </ >)

@@ -4,12 +4,11 @@ import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
 import { Products } from "./products"
 import Footer from "../../components/Footer"
+import API_URL from "../Url"
 const Wishlist=()=>{
-    const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist")
-    const {data:productsData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/products")
-console.log(productsData)
+    const {data,loading,error}=useFetch(`${API_URL}wishlist`)
+    const {data:productsData}=useFetch(`${API_URL}products`)
    const [sizeData,setSizeData]=useState({})
-   console.log(sizeData)
     const [wishlistData,setWishlistData]=useState([])
     const [deleteWishlistAlert,setDeleteWishlistAlert]=useState({visible:false,message:''})
     const [moveToCartAlert,setMoveToCartAlert]=useState({visible:false,message:''})
@@ -23,7 +22,7 @@ console.log(productsData)
     console.log(wishlistData)
     const handleDelete=async(wishlistId)=>{
 try {
-    const response=await fetch(`https://e-commerce-backend-lyart-six.vercel.app/wishlist/${wishlistId}`,{
+    const response=await fetch(`${API_URL}wishlist/${wishlistId}`,{
         method:'Delete'
     })
     if(!response.ok){
@@ -51,7 +50,7 @@ const requestData={
     quantity:1
 }
 try {
-    const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
+    const response=await fetch(`${API_URL}cart`,{
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -68,7 +67,7 @@ try {
     setTimeout(() => {
       setMoveToCartAlert({visible:false,message:''})  
     }, 1500);
-    const deleteresponse= await fetch(`https://e-commerce-backend-lyart-six.vercel.app/wishlist/${wishlistId}`,{
+    const deleteresponse= await fetch(`${API_URL}wishlist/${wishlistId}`,{
         method:'Delete'
     })
     if(!deleteresponse.ok){

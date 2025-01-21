@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header"
 import useFetch from "../../useFetch";
 import { Link } from "react-router-dom";
+import API_URL from "../Url";
+
 const OrderSummary=()=>{
     const {orderId}=useParams()
     console.log(orderId)
-    const {data,loading,error}=useFetch(`https://e-commerce-backend-lyart-six.vercel.app/order/${orderId}`)
+    const {data,loading,error}=useFetch(`${API_URL}order/${orderId}`)
     console.log(data?.updatedAt)
     const subTotal=data?.items.reduce((acc,item)=>
         acc+(item.productDetails.price-((item.productDetails.price*item.productDetails.discountPercentage)/100)*item.quantity)

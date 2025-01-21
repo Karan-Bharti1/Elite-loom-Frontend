@@ -3,23 +3,23 @@ import Header from "../../components/Header";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import useFetch from "../../useFetch";
+import API_URL from "../Url";
 const Cart = () => {
     const [quantity,
         setQuantity] = useState({})
 
-    const {data, loading, error} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/cart")
+    const {data, loading, error} = useFetch(`${API_URL}cart`)
     const [deleteItemAlert,
         setDeleteItemAlert] = useState({visible: false, message: ''})
     const [quantityAlert,
         setQuantityAlert] = useState({visible: false, message: ''})
     const [moveToWishlistAlert,
         setMoveToWishlistAlert] = useState({visible: false, message: ''})
-    const {data: productsData} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/products")
-    console.log(productsData)
+    const {data: productsData} = useFetch(`${API_URL}products`)
+   
 
-    const {data: addressData} = useFetch("https://e-commerce-backend-lyart-six.vercel.app/address")
-    console.log(addressData)
-
+    const {data: addressData} = useFetch(`${API_URL}address`)
+    
     const cartItems = Array.isArray(data)
         ? data
         : [];
@@ -44,7 +44,7 @@ const Cart = () => {
             return;
         
         try {
-            const response = await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`, {
+            const response = await fetch(`${API_URL}cart/${cartId}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json '
@@ -92,7 +92,7 @@ const Cart = () => {
     console.log(error)
     const handleDelete = async(cartId) => {
         try {
-            const response = await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`, {method: "DELETE"})
+            const response = await fetch(`${API_URL}cart/${cartId}`, {method: "DELETE"})
             if (!response.ok) {
                 throw "Failed to delete item from cart"
             }
@@ -158,14 +158,14 @@ const Cart = () => {
             productDetails: productId
         }
         try {
-            const response = await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist", {
+            const response = await fetch(`${API_URL}wishlist`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(requestData)
             })
-            const deleteResponse = await fetch(`https://e-commerce-backend-lyart-six.vercel.app/cart/${cartId}`, {method: "DELETE"})
+            const deleteResponse = await fetch(`${API_URL}cart/${cartId}`, {method: "DELETE"})
             const data = await deleteResponse.json()
             if (data) {
                 setCartData(prev => prev.filter(item => item._id !== cartId));

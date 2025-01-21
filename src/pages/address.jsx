@@ -1,6 +1,6 @@
 import Header from "../../components/Header";
 import { useState } from "react";
-
+import API_URL from "../Url";
 import { Link } from "react-router-dom";
 const AddressForm = ({ addressData, handleChange, handleSubmit,profile }) => (
  
@@ -115,7 +115,7 @@ const handleSubmit=async(event)=>{
 event.preventDefault()
 console.log(addressData)
 try {
-   const response=await fetch ("https://e-commerce-backend-lyart-six.vercel.app/address",{
+   const response=await fetch (`${API_URL}address`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'

@@ -7,9 +7,10 @@ import Header from '../components/Header'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { Products } from './pages/products'
+import API_URL, { homePagePicture } from './Url'
 
 function App() {
-  const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/categories")
+  const {data,loading,error}=useFetch(`${API_URL}categories`)
   console.log(data)
 const displayData=data?.map(category=>(
   <>
@@ -26,6 +27,13 @@ const displayData=data?.map(category=>(
   </div>
   </>
 ))
+const CategoryShimmer=()=>(<div className='col-md-2'>
+  <div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
+  <p className='p-5'></p>
+   
+  </div>
+  
+  </div>)
   return (
     <>
  
@@ -38,7 +46,7 @@ const displayData=data?.map(category=>(
     <img
       className="img-fluid"
       id="introductoryImg"
-      src="https://images.pexels.com/photos/5706277/pexels-photo-5706277.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      src={homePagePicture}
       alt="Introductory"
     />
     <div className="card-img-overlay d-flex flex-column  align-items-center">
@@ -63,49 +71,14 @@ const displayData=data?.map(category=>(
   {loading && (<>
   <div className='container'>
   <div className='row '>
-<div className='col-md-2 '>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
-<p className='p-5'></p>
-</div>
-
-</div>
-<div className='col-md-2'>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
-<p className='p-5'></p>
- 
-</div>
-
-</div>
-<div className='col-md-2'>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true"><p className='p-5'></p>
-</div>
-
-</div>
-<div className='col-md-2'>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
-<p className='p-5'></p>
- 
-</div>
-
-</div>
-<div className='col-md-2'>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true"><p className='p-5'></p>
-</div>
-
-</div>
-<div className='col-md-2'>
-<div className="card bg-dark-subtle" id="home-load-placeholder" aria-hidden="true">
-<p className='p-5'></p>
- 
-</div>
-
-</div>
-
-    
+<CategoryShimmer/>
+<CategoryShimmer/>
+<CategoryShimmer/>
+<CategoryShimmer/>
+<CategoryShimmer/>
+<CategoryShimmer/>
   </div></div>
-  
   </>)}
-
   </main>
   <Footer/>
     </>

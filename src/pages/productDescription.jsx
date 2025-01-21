@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 import { useEffect, useState } from "react"
 
 import {Products} from "./products"
+import API_URL from "../Url"
 const ProductDescription = () => {
     const [size,setSelectedSize]=useState()
     const {productId} = useParams()
@@ -14,13 +15,13 @@ const ProductDescription = () => {
     const [wishlistItems,setWishlistItems]=useState([])
     const [wishlistAlert,setWishlistAlert]=useState({visible:false,message:''})
     const [alreadyWishlistedAlert,setAlreadyWishlistedAlert]=useState({visible:false,message:''})
-    const {data,loading, error} = useFetch(`https://e-commerce-backend-lyart-six.vercel.app/products/${productId}`)
-    const {data:wishlistData}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist")
+    const {data,loading, error} = useFetch(`${API_URL}products/${productId}`)
+    const {data:wishlistData}=useFetch(`${API_URL}wishlist`)
     console.log(wishlistData)
     useEffect(() => {
       const fetchWishlist = async () => {
         try {
-          const response = await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist");
+          const response = await fetch(`${API_URL}wishlist`);
           const wishListItemsData = await response.json();
           if(Array.isArray(wishListItemsData))
   { setWishlistItems(wishListItemsData)}
@@ -39,7 +40,7 @@ const requestData={
     quantity:1
 }
 try {
-  const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/cart",{
+  const response=await fetch(`${API_URL}cart`,{
     method:'POST',
     headers:{
         'content-type':'application/json',
@@ -76,7 +77,7 @@ setAlreadyWishlistedAlert(
     })
    }, 1500);
   if(!isInWishlist)
-{  const response=await fetch("https://e-commerce-backend-lyart-six.vercel.app/wishlist",{
+{  const response=await fetch(`${API_URL}wishlist`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'

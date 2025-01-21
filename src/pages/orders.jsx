@@ -2,8 +2,9 @@ import Header from "../../components/Header";
 import useFetch from "../../useFetch";
 import { useEffect,useState } from "react";
 import {Link} from "react-router-dom"
+import API_URL from "../Url";
 const Orders=()=>{
-    const {data,loading,error}=useFetch("https://e-commerce-backend-lyart-six.vercel.app/orders")
+    const {data,loading,error}=useFetch(`${API_URL}orders`)
     const [ordersData,setOrdersData]=useState([])
     console.log(data)
     useEffect(()=>{
