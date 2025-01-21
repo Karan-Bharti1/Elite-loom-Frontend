@@ -50,3 +50,8 @@
 #alert{
     z-index: 9999;
 }
+@media (min-width: 768px) {
+    #filterSection{
+        display:block;
+    }
+}

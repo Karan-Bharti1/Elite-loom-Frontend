@@ -239,27 +239,19 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
         <br/>
         
         <div className="row">
-            {filteredData
-                ?.length === 0 && <h2 className="text-center py-5">No Products Found</h2>}
-            <div className="col-md-9 ">
-                <div className="row">
-                    {displayData}
-                    
-                    {loading && ( <> <div className="row">
-                        <ShimmerUICard/>
-                        <ShimmerUICard/>
-                        <ShimmerUICard/>
-                        <ShimmerUICard/>
-                        <ShimmerUICard/>
-                        <ShimmerUICard/>
-
-                    </div> </>)}
-                    {error && <h2 className="text-center">Failed to get products data</h2>}
-                </div>
-
-            </div>
-            <div className="col-md-2">
-                <div className="border-start px-4">
+        <div className="col-md-2">
+            <button
+    className="btn btn-danger d-md-none my-3"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#filterSection"
+    aria-expanded="false"
+    aria-controls="filterSection"
+>
+  Filters
+</button>
+<div className="collapse" id="filterSection">
+                <div className="border-end ps-2 pe-5">
                     <h2 >Filters</h2>
                     <label className="text-danger">Gender :
                     </label><br/>
@@ -332,7 +324,28 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         onClick={() => window.location.reload()}>Clear Filters</button>
                 </div>
 
+            </div></div>
+           
+            <div className="col-md-9 ">
+            {filteredData
+                ?.length === 0 && <h2 className="text-center py-5">No Products Found</h2>}
+                <div className="row">
+                    {displayData}
+                    
+                    {loading && ( <> <div className="row">
+                        <ShimmerUICard/>
+                        <ShimmerUICard/>
+                        <ShimmerUICard/>
+                        <ShimmerUICard/>
+                        <ShimmerUICard/>
+                        <ShimmerUICard/>
+
+                    </div> </>)}
+                    {error && <h2 className="text-center">Failed to get products data</h2>}
+                </div>
+
             </div>
+           
         </div>
     </main>
     <Footer/> </>
