@@ -260,7 +260,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         value="male"
                         name="gender"
                         onChange={(event) => setGenderFilter(event.target.value)}
-                        id="male"/>
+                        id="male"/>{" "}
                          For Him</label>
                     <br/>
                     <label htmlFor="female"><input
@@ -268,7 +268,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         value="female"
                         onChange={(event) => setGenderFilter(event.target.value)}
                         name="gender"
-                        id="female"/>
+                        id="female"/>{" "}
                          For Her</label>
                     <br/>
                     <label htmlFor="unisex"><input
@@ -276,7 +276,7 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         value="unisex"
                         onChange={(event) => setGenderFilter(event.target.value)}
                         name="gender"
-                        id="unisex"/>
+                        id="unisex"/>{" "}
                          Unisex</label>
                     <br/>
                     <label htmlFor="customRange2" className="form-label text-danger">Rating ★ :</label>
@@ -309,14 +309,14 @@ setWishlistUpdateTrigger(!wishlistUpdateTrigger)
                         id="lowToHigh"
                         name="price"
                         onChange={handleSort}
-                        value="lowToHigh"/>
+                        value="lowToHigh"/>{" "}
                          Low To High</label><br/>
                     <label htmlFor="highToLow"><input
                         type="radio"
                         id="highToLow"
                         name="price"
                         onChange={handleSort}
-                        value="highToLow"/>
+                        value="highToLow"/>{" "}
                          High To Low</label><br/>
 
                     <button

@@ -17,7 +17,7 @@ return(
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup" >
           <div className="navbar-nav ms-auto mb-2 mb-lg-0 " >
           
-          { searchBar &&<input type="text" className="d-flex justify-content-center my-2 mx-3" onChange={event=>setSearchTerm(event.target.value)}  placeholder="Search..."/>}
+          { searchBar &&<input type="text" className="d-flex justify-content-center my-2 px-4 mx-3" onChange={event=>setSearchTerm(event.target.value)}  placeholder="Search..."/>}
         <NavLink className="nav-link display-2 px-4 mx-3" to="/wishlist">♡ Wishlist</NavLink>
         <NavLink to="/cart" className="nav-link display-2 px-4 mx-3">🛒Cart</NavLink>
         <NavLink to="/profile" className="nav-link display-2 px-4 mx-3">👤My  Profile</NavLink>

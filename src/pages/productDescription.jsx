@@ -3,7 +3,7 @@ import Header from "../../components/Header"
 import useFetch from "../../useFetch"
 import {Link} from "react-router-dom"
 import { useEffect, useState } from "react"
-import Footer from "../../components/Footer"
+
 import {Products} from "./products"
 const ProductDescription = () => {
     const [size,setSelectedSize]=useState()
