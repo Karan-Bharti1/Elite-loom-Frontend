@@ -7,7 +7,7 @@ import Header from '../components/Header'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { Products } from './pages/products'
-import API_URL, { homePagePicture } from './Url'
+import API_URL, { HOME_PAGE_URL } from './Url'
 
 function App() {
   const {data,loading,error}=useFetch(`${API_URL}categories`)
@@ -46,7 +46,7 @@ const CategoryShimmer=()=>(<div className='col-md-2'>
     <img
       className="img-fluid"
       id="introductoryImg"
-      src={homePagePicture}
+      src={HOME_PAGE_URL}
       alt="Introductory"
     />
     <div className="card-img-overlay d-flex flex-column  align-items-center">

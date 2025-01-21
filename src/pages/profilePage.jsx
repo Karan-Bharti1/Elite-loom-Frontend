@@ -4,7 +4,7 @@ import useFetch from "../../useFetch"
 import { useState,useEffect } from "react"
 import Footer from "../../components/Footer"
 import { Products } from "./products"
-import API_URL, { profilePictureUrl } from "../Url"
+import API_URL, { PROFILEPIC_URL } from "../Url"
 
 const Profile=()=>{
       const [addressesData,setAddressesData]=useState([])
@@ -65,7 +65,7 @@ const Profile=()=>{
             <div className="card">
             <div className="row m-3">
 <div className="col-md-4 ">
-<img className="img-fluid" src={profilePictureUrl}/>
+<img className="img-fluid" src={PROFILEPIC_URL}/>
 </div>
 <div className="col-md-4 ">
 <p className="fs-4 py-2"><strong>Name:</strong> John Doe</p>
