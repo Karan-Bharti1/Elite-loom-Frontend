@@ -67,7 +67,7 @@ const Profile=()=>{
 </div>
 <div className="col-md-4 ">
 <p className="fs-4 py-2"><strong>Name:</strong> John Doe</p>
-<p className="fs-4 py-2"><strong>Example:</strong> johndoe@gmail.com </p>
+<p className="fs-4 py-2"><strong>Email-Id:</strong> johndoe@gmail.com </p>
 <p className="fs-4 py-2"><strong>Contact:</strong> +919789009823</p>
 <p className="fs-4 py-2"><strong>Gender:</strong> Male</p>
 </div>
