@@ -10,7 +10,7 @@ const OrderSummary=()=>{
     const {data,loading,error}=useFetch(`${API_URL}order/${orderId}`)
     console.log(data?.updatedAt)
     const subTotal=data?.items.reduce((acc,item)=>
-        acc+(item.productDetails.price-((item.productDetails.price*item.productDetails.discountPercentage)/100)*item.quantity)
+        acc+((item.productDetails.price-((item.productDetails.price*item.productDetails.discountPercentage)/100))*item.quantity)
        ,0)
     const displayData=data?.items.map(item=>(<li className="list-group-item" key={item.productDetails._id}>
         <p className="d-flex justify-content-between "><span>{item.productDetails.productName}, Size: {item.selectedSize} x {item.quantity}</span>
