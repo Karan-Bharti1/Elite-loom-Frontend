@@ -16,6 +16,7 @@ import Details from './pages/productDescription.jsx'
 import Home from './App.jsx'
 import ProfilePage from './pages/profilePage.jsx'
 import WishlistPage from './pages/wishlist.jsx'
+import UpdateAdress from './pages/updateAddress.jsx'
 
 const router=createBrowserRouter([
   {
@@ -55,6 +56,9 @@ const router=createBrowserRouter([
   },{
     path:"/orders/:orderId",
     element:<OrderSummary/>
+  },{
+    path:"/chooseaddress/:addressId",
+    element:<UpdateAdress/>
   }
 ])
 createRoot(document.getElementById('root')).render(

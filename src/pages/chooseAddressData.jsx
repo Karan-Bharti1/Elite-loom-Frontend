@@ -85,7 +85,8 @@ const ChooseAddress = () => {
                 </p>
                 <p>Pincode: {address.pincode}</p>
             </label>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-between">
+                <Link to={`/chooseaddress/${address._id}`} className="btn btn-danger">Edit</Link>
                 <button className="btn btn-close" onClick={() => handleDelete(address._id)}></button>
             </div>
 

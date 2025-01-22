@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import API_URL from "../Url";
 import { Link } from "react-router-dom";
-const AddressForm = ({ addressData, handleChange, handleSubmit,profile }) => (
+export const AddressForm = ({ addressData, handleChange, handleSubmit,profile }) => (
  
     <form onSubmit={handleSubmit}>
       <label htmlFor="receiverName">Receiver's Name:</label>
@@ -113,7 +113,7 @@ const Address=({profile})=>{
      
 const handleSubmit=async(event)=>{
 event.preventDefault()
-console.log(addressData)
+
 try {
    const response=await fetch (`${API_URL}address`,{
     method:'POST',
@@ -142,7 +142,7 @@ return(<>
 <Header/>
 <main className="container">
     {saveAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{saveAlert.message}</span>}
-        <div className="col-md-6">
+        <div className="w-50">
             <h2 className="py-2 my-3">Save and Proceed</h2>
             <AddressForm
               addressData={addressData}
