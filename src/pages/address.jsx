@@ -142,7 +142,7 @@ return(<>
 <Header/>
 <main className="container">
     {saveAlert.visible && <span id="alert" className="top-10 end-0 text-white bg-danger position-fixed p-3 m-3">{saveAlert.message}</span>}
-        <div className="w-50">
+        <div className="w-75 ">
             <h2 className="py-2 my-3">Save and Proceed</h2>
             <AddressForm
               addressData={addressData}
