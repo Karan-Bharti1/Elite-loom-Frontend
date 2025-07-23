@@ -6,8 +6,11 @@
 
 
 Elite Loom is a e-commerce clothing platform based on MERN Stack.This is frontened code for Elite loom.
+
 [For Backend Code Refer](https://github.com/Karan-Bharti1/Elite-loom-backend)
+
 [Live Demo](https://drive.google.com/file/d/1kWRlKV6KSCXGZlmbD8qWPxGy_zWxvMxr/view?usp=sharing)
+
 
 ## Author
 
